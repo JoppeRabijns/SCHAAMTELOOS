@@ -21,7 +21,7 @@ function Nexrender() {
     if (!renderStart && linkedIn && strava && spotify && instagram) {
       axios({
         method: "post",
-        url: "http://84.195.15.105:3000/nexrender/render",
+        url: "https://schaamteloos.herokuapp.com/nexrender/render",
         data: {
           id: socketId,
           facebook: facebook,

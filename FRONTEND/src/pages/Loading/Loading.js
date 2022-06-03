@@ -49,7 +49,7 @@ function Loading() {
   function getLinkedIn() {
     axios({
       method: "post",
-      url: "http://84.195.15.105:3000/scraping/linkedin",
+      url: "https://schaamteloos.herokuapp.com/scraping/linkedin",
       data: {
         name: name,
       },
@@ -61,7 +61,7 @@ function Loading() {
   function getInstagram() {
     axios({
       method: "post",
-      url: "http://84.195.15.105:3000/scraping/instagram",
+      url: "https://schaamteloos.herokuapp.com/scraping/instagram",
       data: {
         name: name,
       },
@@ -73,7 +73,7 @@ function Loading() {
   function getSpotify() {
     axios({
       method: "post",
-      url: "http://84.195.15.105:3000/scraping/spotify",
+      url: "https://schaamteloos.herokuapp.com/scraping/spotify",
       data: {
         name: name,
       },
@@ -85,7 +85,7 @@ function Loading() {
   function getStrava() {
     axios({
       method: "post",
-      url: "http://84.195.15.105:3000/scraping/strava",
+      url: "https://schaamteloos.herokuapp.com/scraping/strava",
       data: {
         name: name,
       },

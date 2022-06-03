@@ -132,7 +132,7 @@ function Player() {
   function call() {
     axios({
       method: "post",
-      url: "http://84.195.15.105:3000/twilio/call",
+      url: "https://schaamteloos.herokuapp.com/twilio/call",
     }).then(function (response) {
       console.log(response.data);
     });
@@ -140,7 +140,7 @@ function Player() {
 
   return (
     <>
-            <Lowerthirds />
+      <Lowerthirds />
 
       <ReactPlayer
         url={currentVideo}

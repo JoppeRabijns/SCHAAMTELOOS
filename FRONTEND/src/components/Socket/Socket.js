@@ -5,7 +5,7 @@ import { changeStatus } from "../../slices/callSlice";
 import { addSocketId } from "../../slices/socketSlice";
 import { setRenderProgress } from "../../slices/videoSlice";
 
-const socket = openSocket("http://84.195.15.105:3000", {
+const socket = openSocket("https://schaamteloos.herokuapp.com/", {
   transports: ["websocket"],
 });
 

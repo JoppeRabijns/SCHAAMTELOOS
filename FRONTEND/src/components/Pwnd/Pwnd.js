@@ -14,7 +14,7 @@ function Pwnd(props) {
   useEffect(() => {
     axios({
       method: "post",
-      url: "http://84.195.15.105:3000/pwnd",
+      url: "https://schaamteloos.herokuapp.com/pwnd",
       data: {
         email: props.email,
       },
