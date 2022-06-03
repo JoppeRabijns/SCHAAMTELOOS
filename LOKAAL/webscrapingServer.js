@@ -50,6 +50,6 @@ app.post("/spotify", (req, res) => {
   });
 });
 
-const listener = app.listen(443, () => {
+const listener = app.listen(4000, () => {
   console.log("App is listening on port " + listener.address().port);
 });

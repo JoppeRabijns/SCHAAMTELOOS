@@ -4,7 +4,7 @@ const axios = require("axios");
 const getLinkedin = (req, res) => {
   let name = req.body.name;
   axios
-    .post(`http://84.195.15.105:443/linkedin`, {
+    .post(`http://84.195.15.105:4000/linkedin`, {
       name: name,
     })
     .then((response) => res.send(response.data));
@@ -13,7 +13,7 @@ const getLinkedin = (req, res) => {
 const getInstagram = (req, res) => {
   let name = req.body.name;
   axios
-    .post(`http://84.195.15.105:443/instagram`, {
+    .post(`http://84.195.15.105:4000/instagram`, {
       name: name,
     })
     .then((response) => res.send(response.data));
@@ -22,7 +22,7 @@ const getInstagram = (req, res) => {
 const getStrava = (req, res) => {
   let name = req.body.name;
   axios
-    .post(`http://84.195.15.105:443/strava`, {
+    .post(`http://84.195.15.105:4000/strava`, {
       name: name,
     })
     .then((response) => res.send(response.data));
@@ -31,7 +31,7 @@ const getStrava = (req, res) => {
 const getSpotify = (req, res) => {
   let name = req.body.name;
   axios
-    .post(`http://84.195.15.105:443/spotify`, {
+    .post(`http://84.195.15.105:4000/spotify`, {
       name: name,
     })
     .then((response) => res.send(response.data));
