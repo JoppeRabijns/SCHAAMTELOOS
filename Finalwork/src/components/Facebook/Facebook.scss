@@ -1,0 +1,34 @@
+.button {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 60vh;
+  text-align: center;
+
+  .facebookButton {
+    font-size: 1em;
+    font-family: fenwick, sans-serif;
+    font-style: normal;
+    text-transform: uppercase;
+    border-radius: 35px;
+    border: 2px solid white;
+    background-color: transparent;
+    width: auto;
+    height: auto;
+    color: white;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    background-color: rgba(0, 0, 0, 0.097);
+    transition: 0.5s all ease;
+  }
+
+  .facebookButton:hover {
+    color: black;
+    background: white;
+    transform: scale(1.05);
+  }
+}

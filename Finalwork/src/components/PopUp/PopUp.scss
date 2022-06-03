@@ -1,0 +1,129 @@
+.popup {
+  width: 30vw;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .popupDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    border-radius: 13px;
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.316);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border-radius: 25px;
+    flex-direction: column;
+    padding: 25px;
+
+    h1 {
+      color: white;
+      margin-bottom: 25px;
+      letter-spacing: 0.5em;
+      font-weight: 300;
+      font-size: 1.4em;
+    }
+    p {
+      width: 80%;
+    }
+
+    .doorgaan {
+      font-size: 1em;
+      font-family: fenwick, sans-serif;
+      font-style: normal;
+      text-transform: uppercase;
+      border-radius: 35px;
+      border: 2px solid white;
+      background-color: transparent;
+      width: auto;
+      height: auto;
+      color: white;
+      padding-left: 2vw;
+      padding-right: 2vw;
+      padding-top: 1vh;
+      padding-bottom: 1vh;
+      background-color: rgba(0, 0, 0, 0.097);
+      transition: 0.5s all ease;
+      margin-top: 25px;
+      transition: 0.5s all ease;
+    }
+
+    .doorgaan:hover {
+      color: black;
+      background: white;
+      transform: scale(1.05);
+    }
+
+    .buttonAfwijzen {
+      margin-top: 25px;
+      font-size: 0.9em;
+      font-family: fenwick, sans-serif;
+      font-style: normal;
+      text-transform: uppercase;
+      border: none;
+      background-color: transparent;
+      color: white;
+      border-bottom: 2px solid white;
+      transition: 0.3s all ease;
+    }
+    .buttonAfwijzen:hover {
+      transform: scale(1.05);
+    }
+    .icons {
+      margin-top: 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .icon {
+      margin: 5px;
+    }
+    .instructie {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 1.4em;
+    }
+    form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    .telefoon {
+      margin-top: 25px;
+      border-radius: 35px;
+      border: 2px solid white;
+      background-color: transparent;
+      width: 18vw;
+      height: 50px;
+      color: rgb(255, 255, 255);
+      font-family: fenwick, sans-serif;
+      font-style: normal;
+      text-transform: uppercase;
+      font-size: 1.2em;
+      text-indent: 25px;
+      cursor: none;
+    }
+
+    .telefoon::placeholder {
+      color: rgba(255, 255, 255, 0.232);
+      font-family: fenwick, sans-serif;
+      font-style: normal;
+      text-transform: uppercase;
+      text-indent: 25px;
+    }
+    input:focus {
+      outline: none;
+    }
+  }
+}

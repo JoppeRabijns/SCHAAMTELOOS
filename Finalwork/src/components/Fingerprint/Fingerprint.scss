@@ -1,0 +1,33 @@
+@import url("https://use.typekit.net/fzu7oox.css");
+@import url("https://use.typekit.net/fzu7oox.css");
+
+.fingerprintSideData {
+  font-size: 1.2em;
+  font-family: fenwick, sans-serif;
+  font-style: normal;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fingerprintSideData h6:first-child {
+  margin-left: -3vw;
+  transform: rotate(-90deg);
+  letter-spacing: 0.5em;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.fingerprintSideData h6:last-child {
+  margin-right: -4vw;
+  transform: rotate(90deg);
+  letter-spacing: 0.5em;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

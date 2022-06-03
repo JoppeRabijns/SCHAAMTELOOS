@@ -1,0 +1,17 @@
+.OverDitProject {
+  height: 70vh;
+  width: 70vw;
+  border-radius: 13px;
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.216);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 25px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 999;
+}

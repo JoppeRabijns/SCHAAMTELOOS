@@ -1,0 +1,36 @@
+.top {
+  position: absolute;
+  height: 50vh;
+  width: 100vw;
+  background-color: rgb(16, 16, 16);
+  z-index: 999;
+  top: 0;
+  animation-name: Animation;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.bottom {
+  position: absolute;
+  height: 50vh;
+  width: 100vw;
+  background-color: rgb(16, 16, 16);
+  z-index: 999;
+  bottom: 0;
+  animation-name: Animation;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes Animation {
+  from {
+    height: 5Ovh;
+  }
+  to {
+    height: 0vh;
+  }
+}
