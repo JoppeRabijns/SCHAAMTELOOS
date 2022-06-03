@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 require("dotenv").config();
 const routes = require("./routes/routes");
 
-const listener = app.listen(1000, () => {
+const listener = app.listen(process.env.PORT || 1000, () => {
   console.log("App is listening on port " + listener.address().port);
 });
 
