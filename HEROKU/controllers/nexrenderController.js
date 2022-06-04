@@ -21,8 +21,6 @@ const render = (req, res) => {
       spotify: spotify,
     })
     .then((response) => res.send(response.data));
-
-  main(socketId, res, data).catch(console.error);
 };
 
 module.exports = { render };

@@ -10,7 +10,7 @@ const ffmpeg = require("fluent-ffmpeg");
 require("dotenv").config();
 
 const client = createClient({
-  host: "http://84.195.15.105:3000",
+  host: "http://localhost:3000",
   secret: "schaamteloos.online",
 });
 
@@ -87,7 +87,6 @@ app.get("/getVideo", (req, res) => {
 });
 
 app.post("/render", (req, res) => {
-  let socketId = req.body.id;
   let data = {
     facebook: req.body.facebook,
     fingerprint: req.body.fingerprint,
@@ -175,7 +174,7 @@ const main = async (res, data) => {
   result.on("created", (job) => console.log("project has been created"));
   result.on("started", (job) => console.log("project rendering started"));
   result.on("progress", (job, percents) => console.log(percents));
-  result.on("finished", (job) => res.sendStatus(200));
+  result.on("finished", (job) => res.send("OK"));
   /*   concat(data.facebook.id, res)); */
   result.on("error", (err) => console.log("project rendering error", err));
 };
