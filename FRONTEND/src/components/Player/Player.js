@@ -50,7 +50,7 @@ function Player() {
     },
     {
       scene: "1",
-      url: `http://84.195.15.105:4000/nexrender/getVideo?facebookID=${facebookID}`,
+      url: `https://schaamteloos.online/media/${facebookID}`,
     },
     {
       scene: "2",
