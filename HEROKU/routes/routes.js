@@ -17,8 +17,8 @@ router.post("/twilio/call", callController.call);
 
 //NEXRENDER
 router.post("/nexrender/render", nexrenderController.render);
-router.get("/nexrender/getVideo", nexrenderController.getVideo);
-
+/* router.get("/nexrender/getVideo", nexrenderController.getVideo);
+ */
 //PWND
 router.post("/pwnd", pwndController.getPwnd);
 

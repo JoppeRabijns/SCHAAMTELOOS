@@ -22,7 +22,7 @@ const call = (req, res) => {
         "<Response><Play>https://joppe.rabijns.be/TEKST_2.mp3</Play><Hangup/></Response>",
       to: `${phoneNumber}`,
       from: "+32460258118",
-      statusCallback: "https://schaamteloos.herokuapp.com/twilio/events", //HEROKU LINK
+      statusCallback: "https://schaamteloos.herokuapp.com/twilio/events",
       statusCallbackMethod: "POST",
       statusCallbackEvent: ["initiated", "ringing", "answered", "completed"],
     },

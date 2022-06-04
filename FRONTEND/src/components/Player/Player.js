@@ -50,7 +50,7 @@ function Player() {
     },
     {
       scene: "1",
-      url: `http://84.195.15.105:3000/nexrender/getVideo?facebookID=${facebookID}`,
+      url: `http://84.195.15.105:4000/nexrender/getVideo?facebookID=${facebookID}`,
     },
     {
       scene: "2",
@@ -114,7 +114,7 @@ function Player() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videoTime]); */
 
-/*   const longPress = useLongPress(
+  /*   const longPress = useLongPress(
     () => {
       batch(() => {
         dispatch(setPlayingStateTrue());
