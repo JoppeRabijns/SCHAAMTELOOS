@@ -6,10 +6,10 @@ const getPwnd = (req, res) => {
       "hibp-api-key": "5e3d5c7451294fb1ae107a6c18f2a8b4",
     },
   };
-
+  let email = req.body.email;
   axios
     .get(
-      `https://haveibeenpwned.com/api/v3/breachedaccount/joppe@rabijns.be?truncateResponse=false&includeUnverified=false	`,
+      `https://haveibeenpwned.com/api/v3/breachedaccount/${email}?truncateResponse=false&includeUnverified=false	`,
       config
     )
     .then((response) => res.send(response.data));

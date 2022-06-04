@@ -15,13 +15,14 @@ const getEventStatus = (req, res) => {
 };
 
 const call = (req, res) => {
+  let phoneNumber = req.body.phoneNumber;
   client.calls.create(
     {
       twiml:
         "<Response><Play>https://joppe.rabijns.be/TEKST_2.mp3</Play><Hangup/></Response>",
-      to: "+32478027029",
+      to: `${phoneNumber}`,
       from: "+32460258118",
-      statusCallback: "http://adequaat.ddns.net:3000/twilio/events", //HEROKU LINK
+      statusCallback: "https://schaamteloos.herokuapp.com/twilio/events", //HEROKU LINK
       statusCallbackMethod: "POST",
       statusCallbackEvent: ["initiated", "ringing", "answered", "completed"],
     },

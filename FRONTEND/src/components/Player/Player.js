@@ -29,6 +29,7 @@ function Player() {
   const videoTime = useSelector((state) => state.video.time);
   const facebookID = useSelector((state) => state.data.facebook.id);
   const facebookGender = useSelector((state) => state.data.facebook.gender);
+  const phoneNumber = useSelector((state) => state.data.phonenumber);
   const holdAndContinueButton = useSelector(
     (state) => state.video.holdAndContinueButton
   );
@@ -113,7 +114,7 @@ function Player() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videoTime]); */
 
-  const longPress = useLongPress(
+/*   const longPress = useLongPress(
     () => {
       batch(() => {
         dispatch(setPlayingStateTrue());
@@ -127,12 +128,15 @@ function Player() {
       cancelOnMovement: false,
       detect: "mouse",
     }
-  );
+  ); */
 
   function call() {
     axios({
       method: "post",
       url: "https://schaamteloos.herokuapp.com/twilio/call",
+      data: {
+        phoneNumber: phoneNumber,
+      },
     }).then(function (response) {
       console.log(response.data);
     });
@@ -141,7 +145,6 @@ function Player() {
   return (
     <>
       <Lowerthirds />
-
       <ReactPlayer
         url={currentVideo}
         playing={videoPlaying}
@@ -197,13 +200,13 @@ function Player() {
         />
       )}
 
-      {holdAndContinueButton && !holdAndContinueButtonActivated ? (
+      {/* {holdAndContinueButton && !holdAndContinueButtonActivated ? (
         <button {...longPress()} className="longPressButton">
           Hold to continue
         </button>
       ) : (
         <></>
-      )}
+      )} */}
     </>
   );
 }
