@@ -5,10 +5,6 @@ const bodyParser = require("body-parser");
 require("dotenv").config();
 const routes = require("./routes/routes");
 
-const listener = app.listen(process.env.PORT || 1000, () => {
-  console.log("App is listening on port " + listener.address().port);
-});
-
 //MIDDLEWARE
 app.use(express.static("static"));
 app.use(cors());
@@ -20,6 +16,10 @@ app.use(bodyParser.json());
 app.use("/", routes);
 app.get("/", (req, res) => {
   res.send("Dit werkt");
+});
+
+const listener = app.listen(process.env.PORT || 1000, () => {
+  console.log("App is listening on port " + listener.address().port);
 });
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
