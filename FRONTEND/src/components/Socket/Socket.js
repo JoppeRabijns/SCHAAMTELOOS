@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import openSocket from "socket.io-client";
-import { useDispatch /* useSelector */ } from "react-redux";
+import { useDispatch } from "react-redux";
 import { changeStatus } from "../../slices/callSlice";
 import { addSocketId } from "../../slices/socketSlice";
 import { setRenderProgress } from "../../slices/videoSlice";
@@ -21,12 +21,10 @@ function Socket() {
     });
 
     socket.on("render progress", (percents) => {
-      console.log(percents);
       dispatch(setRenderProgress(percents));
     });
 
     socket.on("connect", () => {
-      console.log(socket.id);
       dispatch(addSocketId(socket.id));
     });
   });

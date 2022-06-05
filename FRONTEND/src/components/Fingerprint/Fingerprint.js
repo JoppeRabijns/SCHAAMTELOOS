@@ -6,9 +6,6 @@ import "./Fingerprint.scss";
 const BROWSER_API_KEY = "hhw5HKFXfMgxBOyiY8av";
 const SERVER_API_KEY = "eTJEo5opd2vkqhHS8OQc";
 
-/* const BROWSER_API_KEY = process.env.REACT_APP_BROWSER_API_KEY;
-const SERVER_API_KEY = process.env.REACT_APP_SERVER_API_KEY; */
-
 function Fingerprint() {
   const dispatch = useDispatch();
   const [ip, setIp] = useState();
@@ -47,7 +44,6 @@ function Fingerprint() {
   }
 
   //https://stackoverflow.com/questions/37893131/how-to-convert-lat-long-from-decimal-degrees-to-dms-format
-
   function toDegreesMinutesAndSeconds(coordinate) {
     var absolute = Math.abs(coordinate);
     var degrees = Math.floor(absolute);

@@ -46,3 +46,22 @@
   width: 100px;
   height: auto;
 }
+
+.videoout-enter {
+  opacity: 0.01;
+}
+
+/* ending ENTER animation */
+.videoout-enter-active {
+  opacity: 1;
+  transition: all 300ms ease-in-out;
+}
+
+.videoout-exit {
+  opacity: 1;
+}
+
+.videoout-exit-active {
+  opacity: 0;
+  transition: all 300ms ease-in-out;
+}

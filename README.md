@@ -1,7 +1,9 @@
 # 👀 Schaamteloos.online
+
 https://schaamteloos.online
 
 dsqdsd vbsqdvsqndvsqdvsqdvsqnbdvsqb dvsq vdsqddddqsdsqdsqdsqdsqdsqdsqdsqdsqsdqdqsdqdqsdsqdqsdsqddsqdd
+
 ## 👨🏼‍💻 Auteur
 
 [![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://joppe.rabijns.be/)
@@ -12,7 +14,6 @@ dsqdsd vbsqdvsqndvsqdvsqdvsqnbdvsqb dvsq vdsqddddqsdsqdsqdsqdsqdsqdsqdsqdsqsdqdq
 **Client:** React, Redux, GSAP, Socket.io
 
 **Server:** Node, Express, NexRender, Twillio, Socket.io
-
 
 ## 🚀 Lokaal starten
 
@@ -40,8 +41,6 @@ Start the server
   npm start
 ```
 
-
 ## 📸 Screenshots
 
 ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-

@@ -8,8 +8,12 @@ import {
 import { setmenuOpenTrue, setmenuOpenFalse } from "../../slices/menuSlice";
 import click_select from "../../assets/sfx/click_select.mp3";
 import Title from "../Title/Title";
-import { X, Twitter, Facebook, Linkedin } from "react-feather";
+import { X } from "react-feather";
 import { Menu as MenuIcon } from "react-feather";
+import UseAnimations from "react-useanimations";
+import twitter from "react-useanimations/lib/twitter";
+import facebook from "react-useanimations/lib/facebook";
+import linkedin from "react-useanimations/lib/linkedin";
 
 const Menu = () => {
   const dispatch = useDispatch();
@@ -55,9 +59,47 @@ const Menu = () => {
             <h2 onClick={() => window.location.reload()}>DATA VERWIJDEREN</h2>
           </div>
           <div className="delen">
-            <Twitter color="white" size={45} className="icon" />
-            <Facebook color="white" size={45} className="icon" />
-            <Linkedin color="white" size={45} className="icon" />
+            <UseAnimations
+              animation={twitter}
+              size={45}
+              className="icon"
+              strokeColor="white"
+              wrapperStyle={{ padding: 10 }}
+              render={(eventProps, animationProps) => (
+                <a
+                  {...eventProps}
+                  href="http://www.twitter.com/share?url=https://adequaat.media/index.html"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <div {...animationProps} />
+                </a>
+              )}
+            />
+            <UseAnimations
+              animation={facebook}
+              size={45}
+              className="icon"
+              strokeColor="white"
+              wrapperStyle={{ padding: 10 }}
+            />
+            <UseAnimations
+              animation={linkedin}
+              size={45}
+              className="icon"
+              strokeColor="white"
+              wrapperStyle={{ padding: 10 }}
+              render={(eventProps, animationProps) => (
+                <a
+                  {...eventProps}
+                  href="https://www.linkedin.com/sharing/share-offsite/?url=https://adequaat.media/index.html"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <div {...animationProps} />
+                </a>
+              )}
+            />
           </div>
         </div>
       ) : (

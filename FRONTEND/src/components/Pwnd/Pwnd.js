@@ -32,13 +32,13 @@ function Pwnd(props) {
 
   useEffect(() => {
     const tl = gsap.timeline();
-    tl.to("#tekst1", { opacity: 1, duration: 2 });
-    tl.to("#tekst1", { opacity: 0, duration: 2, delay: 5 });
+    tl.to("#tekst1", { opacity: 1, duration: 1 });
+    tl.to("#tekst1", { opacity: 0, duration: 1, delay: 2 });
     tl.to("#tekst2", { opacity: 1, duration: 2 });
     tl.to("#tekst2", {
       opacity: 0,
-      duration: 3,
-      delay: 7,
+      duration: 1,
+      delay: 4,
       onComplete: () => {
         setAnimationDone(true);
       },

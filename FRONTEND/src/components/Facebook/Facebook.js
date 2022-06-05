@@ -8,8 +8,6 @@ function Facebook() {
 
   const dispatchFacebookData = (response) => {
     dispatch(addFacebookData(response));
-    /*     navigate("/loading");
-     */
   };
 
   return (
