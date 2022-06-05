@@ -10,7 +10,7 @@ const ffmpeg = require("fluent-ffmpeg");
 require("dotenv").config();
 
 const client = createClient({
-  host: "http://localhost:3000",
+  host: "http://84.195.15.105:3000",
   secret: "schaamteloos.online",
 });
 
@@ -95,10 +95,11 @@ app.post("/render", (req, res) => {
     strava: req.body.strava,
     spotify: req.body.spotify,
   };
+  res.sendStatus(200);
   main(res, data).catch(console.error);
 });
 
-const main = async (res, data) => {
+ main = async (res, data) => {
   const result = await client.addJob({
     template: {
       src: `file:///Users/joppe.rabijns/Desktop/V1/1080p_Tracking.aep`,
@@ -164,17 +165,24 @@ const main = async (res, data) => {
           output: "encoded.mp4",
         },
         {
-          module: "@nexrender/action-copy",
+          "module": "@nexrender/action-upload",
           input: "encoded.mp4",
-          output: `/Users/joppe.rabijns/Desktop/Finalwork_Nexrender_Outputs/${data.facebook.id}.mp4`,
-        },
+          "provider": "ftp",
+          "params": {
+              "host": "ftp.rabijnsbe.webhosting.be",
+              "port": 21,
+              "user": "joppe@rabijnsbe",
+              "password": "VdAkfDA5JvcnFX!",
+              "output": `/media/${data.facebook.id}.mp4`
+          }
+      }
       ],
     },
   });
   result.on("created", (job) => console.log("project has been created"));
-  result.on("started", (job) => console.log("project rendering started"));
+  result.on("started", (job) => console.log("start"));
   result.on("progress", (job, percents) => console.log(percents));
-  result.on("finished", (job) => res.send("OK"));
+  result.on("finished", (job) => /* res.sendStatus(200) */ console.log("finsihed"));
   /*   concat(data.facebook.id, res)); */
   result.on("error", (err) => console.log("project rendering error", err));
 };
