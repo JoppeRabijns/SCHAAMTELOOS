@@ -109,7 +109,7 @@ const all = async (res, data) => {
   }
   const result = await client.addJob({
     template: {
-      src: `file:///Users/joppe.rabijns/Desktop/V1/1080p_Tracking.aep`,
+      src: `file:///Users/joppe.rabijns/Desktop/NEXRENDER_V1/1080p_Tracking.aep`,
       composition: `ALL`,
       outputExt: "mov",
       outputModule: "FINALWORK",
@@ -165,6 +165,20 @@ const all = async (res, data) => {
         composition: "ALL->PANCARTE",
       },
       {
+        type: "data",
+        layerName: "STUDIE",
+        property: "Source Text",
+        value: `${data.linkedIn.education}`,
+        composition: "ALL->PANCARTE",
+      },
+      {
+        type: "data",
+        layerName: "WERK",
+        property: "Source Text",
+        value: `${data.linkedIn.experience}`,
+        composition: "ALL->PANCARTE",
+      },
+      {
         type: "image",
         layerName: "FOTO",
         src: `${data.facebook.picture.data.url}`,
@@ -212,7 +226,7 @@ const end = async (res, data) => {
   }
   const result = await client.addJob({
     template: {
-      src: `file:///Users/joppe.rabijns/Desktop/V1/1080p_Tracking.aep`,
+      src: `file:///Users/joppe.rabijns/Desktop/NEXRENDER_V1/1080p_Tracking.aep`,
       composition: `END`,
       outputExt: "mov",
       outputModule: "FINALWORK",
@@ -268,11 +282,25 @@ const end = async (res, data) => {
         composition: "END->PANCARTE",
       },
       {
+        type: "data",
+        layerName: "STUDIE",
+        property: "Source Text",
+        value: `${data.linkedIn.education}`,
+        composition: "END->PANCARTE",
+      },
+      {
+        type: "data",
+        layerName: "WERK",
+        property: "Source Text",
+        value: `${data.linkedIn.experience}`,
+        composition: "END->PANCARTE",
+      },
+      {
         type: "image",
         layerName: "FOTO",
         src: `${data.facebook.picture.data.url}`,
         composition: "END->PANCARTE->FOTO",
-      },
+      }
     ],
     actions: {
       postrender: [
