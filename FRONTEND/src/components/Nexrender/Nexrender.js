@@ -29,6 +29,7 @@ function Nexrender() {
           instagram: instagram,
           strava: strava,
           spotify: spotify,
+          linkedIn: linkedIn,
         },
       })
         .then(dispatch(setRenderStart()))

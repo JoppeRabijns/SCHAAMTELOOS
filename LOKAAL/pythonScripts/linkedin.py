@@ -52,9 +52,11 @@ while True:
     education_school_name_first = education_school_name.find("span",{'class': 'visually-hidden'})
     education =  education_school_name_first.get_text().strip() 
     experience_loc = soup.find('div',id='experience')
-    experience_sibling = experience_loc.find_next_siblings("div")[1]
+    experience_sibling = experience_loc.find_next_siblings("div")[2]
     experience_enitity =  experience_sibling.find("div", {'class': 'pvs-entity'})
-    experience =  experience_enitity.get_text().strip() 
+    experience_name = experience_enitity.find("span",{'class': 'mr1'})
+    experience_name_first = experience_name.find("span",{'class': 'visually-hidden'})
+    experience =  experience_name_first.get_text().strip() 
     linkedIn_data = {
       "name": name,
       "tagline": tagline,
