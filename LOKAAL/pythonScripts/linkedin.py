@@ -11,7 +11,6 @@ import json
 ################
 import sys
 
-searchname = sys.argv[1]
 
 while True:
   try:
@@ -32,7 +31,7 @@ while True:
     driver.find_element_by_class_name("search-global-typeahead__input").click()
     time.sleep(0.5)
     search = driver.find_element_by_class_name("search-global-typeahead__input")
-    search.send_keys(searchname)  
+    search.send_keys("joppe rabijns")  
     search.send_keys(Keys.ENTER)
     time.sleep(1)
     result = driver.find_element_by_id('main')
@@ -52,7 +51,7 @@ while True:
     education_school_name_first = education_school_name.find("span",{'class': 'visually-hidden'})
     education =  education_school_name_first.get_text().strip() 
     experience_loc = soup.find('div',id='experience')
-    experience_sibling = experience_loc.find_next_siblings("div")[2]
+    experience_sibling = experience_loc.find_next_siblings("div")[1]
     experience_enitity =  experience_sibling.find("div", {'class': 'pvs-entity'})
     experience_name = experience_enitity.find("span",{'class': 'mr1'})
     experience_name_first = experience_name.find("span",{'class': 'visually-hidden'})
