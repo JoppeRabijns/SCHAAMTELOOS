@@ -98,7 +98,7 @@ function Loading() {
     <div className="loading">
       <Pwnd email={email} />
       <Nexrender />
-      <Progressbar progress={renderProgressPercent} />
+      <Progressbar />
     </div>
   );
 }

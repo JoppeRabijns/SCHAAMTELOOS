@@ -10,8 +10,10 @@
 .progressBar {
   background: #ffffff;
   transform-origin: top left;
-  transform: scale(0, 0);
+  transform: scale(0, 1);
   position: relative;
+  animation: scalebar 28s linear 1;
+  animation-fill-mode: forwards;
 }
 
 .progressBarContainer,
@@ -19,13 +21,11 @@
   height: 20px;
 }
 
-.progressNumber {
-  position: absolute;
-  color: black;
-  font-size: 15px;
-  right: 0px;
-  display: inline-block;
-  font-family: fenwick, sans-serif;
-  letter-spacing: 0.5em;
-  font-style: normal;
+@keyframes scalebar {
+  0% {
+    transform: scale(0, 1);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
 }

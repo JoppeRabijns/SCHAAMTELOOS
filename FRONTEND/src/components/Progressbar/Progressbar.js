@@ -1,15 +1,9 @@
 import("./Progressbar.scss");
 
-function Progressbar(props) {
-  let scaleprogress = props.progress / 100;
+function Progressbar() {
   return (
     <div className="progressBarContainer">
-      <div
-        className="progressBar"
-        style={{ transform: `scale(${scaleprogress}, 1)`, opacity: 1 }}
-      >
-        {/*   <h6 className="progressNumber">{props.progress}%</h6> */}
-      </div>
+      <div className="progressBar" style={{ opacity: 1 }}></div>
     </div>
   );
 }
