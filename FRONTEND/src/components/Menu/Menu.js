@@ -15,6 +15,8 @@ import twitter from "react-useanimations/lib/twitter";
 import facebook from "react-useanimations/lib/facebook";
 import linkedin from "react-useanimations/lib/linkedin";
 
+//https://stackoverflow.com/questions/9120539/facebook-share-link-without-javascript
+
 const Menu = () => {
   const dispatch = useDispatch();
   const videoPlaying = useSelector((state) => state.video.playing);
@@ -68,7 +70,7 @@ const Menu = () => {
               render={(eventProps, animationProps) => (
                 <a
                   {...eventProps}
-                  href="http://www.twitter.com/share?url=https://adequaat.media/index.html"
+                  href="http://www.twitter.com/share?url=https://schaamteloos.online/"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -78,10 +80,21 @@ const Menu = () => {
             />
             <UseAnimations
               animation={facebook}
-              size={45}
-              className="icon"
+              size={30}
               strokeColor="white"
               wrapperStyle={{ padding: 10 }}
+              render={(eventProps, animationProps) => (
+                <a
+                  {...eventProps}
+                  href="https://www.facebook.com/sharer/sharer.php?u=https://schaamteloos.online/L&t=SCHAAMTELOOS"
+                  onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
+                  target="_blank"
+                  rel="noreferrer"
+                  title="Share on Facebook"
+                >
+                  <div {...animationProps} />
+                </a>
+              )}
             />
             <UseAnimations
               animation={linkedin}
@@ -92,7 +105,7 @@ const Menu = () => {
               render={(eventProps, animationProps) => (
                 <a
                   {...eventProps}
-                  href="https://www.linkedin.com/sharing/share-offsite/?url=https://adequaat.media/index.html"
+                  href="https://www.linkedin.com/sharing/share-offsite/?url=https://schaamteloos.online/"
                   target="_blank"
                   rel="noreferrer"
                 >
