@@ -1,9 +1,12 @@
 const axios = require("axios");
+require("dotenv").config();
+
+const hibp_key = process.env.HIBP_KEY;
 
 const getPwnd = (req, res) => {
   const config = {
     headers: {
-      "hibp-api-key": "5e3d5c7451294fb1ae107a6c18f2a8b4",
+      "hibp-api-key": hibp_key,
     },
   };
   let email = req.body.email;
