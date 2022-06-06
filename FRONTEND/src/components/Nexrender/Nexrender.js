@@ -16,6 +16,7 @@ function Nexrender() {
   const socketId = useSelector((state) => state.socket.id);
   const facebook = useSelector((state) => state.data.facebook);
   const fingerprint = useSelector((state) => state.data.fingerprint);
+  const phonenumber = useSelector((state) => state.data.phonenumber);
 
   useEffect(() => {
     if (!renderStart && linkedIn && strava && spotify && instagram) {
@@ -30,6 +31,7 @@ function Nexrender() {
           strava: strava,
           spotify: spotify,
           linkedIn: linkedIn,
+          phonenumber: phonenumber,
         },
       })
         .then(dispatch(setRenderStart()))

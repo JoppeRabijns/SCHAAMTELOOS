@@ -93,6 +93,7 @@ app.post("/render", (req, res) => {
     instagram: req.body.instagram,
     strava: req.body.strava,
     spotify: req.body.spotify,
+    phonenumber: req.body.phonenumber,
   };
   res.sendStatus(200);
   all(res, data).catch(console.error);
@@ -100,6 +101,12 @@ app.post("/render", (req, res) => {
 });
 
 const all = async (res, data) => {
+  let gender;
+  if (data.facebook.gender === "male") {
+    gender = "Man";
+  } else if (data.facebook.gender === "female") {
+    gender = "Vrouw";
+  }
   const result = await client.addJob({
     template: {
       src: `file:///Users/joppe.rabijns/Desktop/V1/1080p_Tracking.aep`,
@@ -131,9 +138,16 @@ const all = async (res, data) => {
       },
       {
         type: "data",
+        layerName: "GESLACHT",
+        property: "Source Text",
+        value: `${gender}`,
+        composition: `ALL->PANCARTE`,
+      },
+      {
+        type: "data",
         layerName: "GSM",
         property: "Source Text",
-        value: `${data.fingerprint.ip}`,
+        value: `${data.phonenumber}`,
         composition: "ALL->PANCARTE",
       },
       {
@@ -190,6 +204,12 @@ const all = async (res, data) => {
 };
 
 const end = async (res, data) => {
+  let gender;
+  if (data.facebook.gender === "male") {
+    gender = "Man";
+  } else if (data.facebook.gender === "female") {
+    gender = "Vrouw";
+  }
   const result = await client.addJob({
     template: {
       src: `file:///Users/joppe.rabijns/Desktop/V1/1080p_Tracking.aep`,
@@ -221,9 +241,16 @@ const end = async (res, data) => {
       },
       {
         type: "data",
+        layerName: "GESLACHT",
+        property: "Source Text",
+        value: `${gender}`,
+        composition: `END->PANCARTE`,
+      },
+      {
+        type: "data",
         layerName: "GSM",
         property: "Source Text",
-        value: `${data.fingerprint.ip}`,
+        value: `${data.phonenumber}`,
         composition: "END->PANCARTE",
       },
       {

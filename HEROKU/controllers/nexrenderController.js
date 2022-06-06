@@ -8,6 +8,7 @@ const render = (req, res) => {
   let instagram = req.body.instagram;
   let strava = req.body.strava;
   let spotify = req.body.spotify;
+  let phonenumber = req.body.phonenumber;
 
   axios
     .post(`http://84.195.15.105:4000/render`, {
@@ -15,8 +16,9 @@ const render = (req, res) => {
       fingerprint: fingerprint,
       linkedIn: linkedIn,
       strava: strava,
-      spotify:spotify,
+      spotify: spotify,
       instagram: instagram,
+      phonenumber: phonenumber,
     })
     .then((response) => res.send(response.data));
 };
