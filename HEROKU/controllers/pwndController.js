@@ -9,10 +9,13 @@ const getPwnd = (req, res) => {
   let email = req.body.email;
   axios
     .get(
-      `https://haveibeenpwned.com/api/v3/breachedaccount/martine@rabijns.be?includeUnverified=false	`,
+      `https://haveibeenpwned.com/api/v3/breachedaccount/martine@rabijns.be?truncateResponse=false&includeUnverified=false`,
       config
     )
-    .then((response) => res.send(response.data));
+    .then((response) => res.send(response.data))
+    .catch(() => {
+      res.sendStatus(404);
+    });
 };
 
 module.exports = { getPwnd };
