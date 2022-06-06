@@ -7,10 +7,11 @@ import {
   setPlayingStateFalse,
   setTime,
 } from "../../slices/videoSlice";
+
+import { setMenuHide } from "../../slices/menuSlice";
 import soundGif from "../../assets/sound.gif";
 import soundOff from "../../assets/soundOff.png";
-import Lowerthirds from "../Lowerthirds/Lowerthird";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+import gsap from "gsap";
 
 const axios = require("axios").default;
 
@@ -108,13 +109,29 @@ function Player() {
     });
   }
 
+  useEffect(() => {
+    if (currentNumber === 2) {
+      dispatch(setMenuHide());
+    }
+  });
+
+  function ended() {
+    if (currentNumber === 3) {
+      const tl = gsap.timeline();
+      tl.to("#videoplayer", { opacity: 0, duration: 1.5 });
+      tl.to("#einde1", { opacity: 1, duration: 1 });
+      tl.to("#einde1", { opacity: 0, duration: 1, delay: 2 });
+      tl.to("#einde2", { opacity: 1, duration: 1.5 });
+    } else {
+      setCurrentNumber(currentNumber + 1);
+    }
+  }
+
   return (
     <>
-      <Lowerthirds />
-      {/* <TransitionGroup>
-        <CSSTransition key={currentNumber} timeout={300} classNames="videoout"> */}
       <ReactPlayer
         url={currentVideo}
+        id="videoplayer"
         playing={videoPlaying}
         preload="auto"
         volume={sound}
@@ -122,14 +139,17 @@ function Player() {
         height="100vh"
         className="player"
         ref={playerRef}
-        onEnded={() => setCurrentNumber(currentNumber + 1)}
+        onEnded={() => ended()}
         onProgress={(progress) => {
           videoPlaying && dispatch(setTime(progress.playedSeconds));
         }}
       />
-      {/*  </CSSTransition>
-      </TransitionGroup>
- */}
+      <h1 id="einde1" className="einde">
+        HET INTERNET VERGEET NIKS,
+      </h1>
+      <h1 id="einde2" className="einde">
+        WEES NIET SCHAAMTELOOS ONLINE!
+      </h1>
       {sound === 1 ? (
         <img
           src={soundGif}

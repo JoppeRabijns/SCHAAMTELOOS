@@ -38,7 +38,7 @@ function Pwnd(props) {
     tl.to("#tekst2", {
       opacity: 0,
       duration: 1,
-      delay: 4,
+      delay: 3,
       onComplete: () => {
         setAnimationDone(true);
       },
