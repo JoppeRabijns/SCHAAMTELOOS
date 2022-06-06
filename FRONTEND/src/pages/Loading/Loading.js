@@ -30,9 +30,6 @@ function Loading() {
   const name = useSelector((state) => state.data.facebook.name);
   const email = useSelector((state) => state.data.facebook.email);
   const scrapingFinished = useSelector((state) => state.data.scrapingFinished);
-  const renderProgressPercent = useSelector(
-    (state) => state.video.renderProgress.percents
-  );
   /*   const scrapingData = useSelector((state) => state.data);*/
 
   useEffect(() => {

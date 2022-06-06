@@ -122,6 +122,8 @@ function Player() {
       tl.to("#einde1", { opacity: 1, duration: 1 });
       tl.to("#einde1", { opacity: 0, duration: 1, delay: 2 });
       tl.to("#einde2", { opacity: 1, duration: 1.5 });
+      tl.to("#einde2", { opacity: 0, duration: 1.5, delay: 2 });
+      tl.to("#terugnaarhome", { opacity: 1, duration: 1 });
     } else {
       setCurrentNumber(currentNumber + 1);
     }
@@ -150,6 +152,13 @@ function Player() {
       <h1 id="einde2" className="einde">
         WEES NIET SCHAAMTELOOS ONLINE!
       </h1>
+      <button
+        id="terugnaarhome"
+        className="terugnaarhome"
+        onClick={() => window.location.reload()}
+      >
+        Terug naar home
+      </button>
       {sound === 1 ? (
         <img
           src={soundGif}

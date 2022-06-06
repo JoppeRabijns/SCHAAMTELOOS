@@ -83,7 +83,7 @@ function PopUp() {
           <input
             onChange={(e) => handleInput(e)}
             type="tel"
-            placeholder="+3242332323"
+            placeholder="+324........"
             required
             className="telefoon cursor"
           />

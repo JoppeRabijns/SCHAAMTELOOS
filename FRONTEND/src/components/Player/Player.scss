@@ -80,3 +80,38 @@
   font-weight: 700;
   font-style: normal;
 }
+
+.terugnaarhome {
+  font-size: 1em;
+  font-family: fenwick, sans-serif;
+  font-style: normal;
+  text-transform: uppercase;
+  border-radius: 35px;
+  border: 2px solid white;
+  background-color: transparent;
+  opacity: 0;
+  z-index: 998;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+  width: 300px;
+  height: auto;
+  margin-left: 0;
+  margin-right: 0;
+  color: white;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  background-color: rgba(0, 0, 0, 0.097);
+  transition: 0.5s all ease;
+}
+
+.terugnaarhome:hover {
+  color: black;
+  background: white;
+  transform: scale(1.05);
+}

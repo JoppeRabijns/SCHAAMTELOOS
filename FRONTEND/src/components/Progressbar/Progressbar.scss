@@ -6,7 +6,12 @@
   bottom: 0;
   left: 0;
 }
-
+.loadingText {
+  font-size: 14px;
+  bottom: 40px;
+  left: 30px;
+  color: #ffffff;
+}
 .progressBar {
   background: #ffffff;
   transform-origin: top left;
@@ -16,7 +21,6 @@
   animation-fill-mode: forwards;
 }
 
-.progressBarContainer,
 .progressBar {
   height: 20px;
 }
