@@ -1,23 +1,17 @@
 import { useState, useEffect, useRef } from "react";
 import "./Player.scss";
 import ReactPlayer from "react-player";
-import { useDispatch, useSelector, batch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setPlayingStateTrue,
   setPlayingStateFalse,
   setTime,
-  setHoldAndContinueButtonFalse,
-  setHoldAndContinueButtonTrue,
-  setHoldAndContinueButtonActivated,
 } from "../../slices/videoSlice";
-import { useLongPress } from "use-long-press";
-import subtitles from "../../assets/captions/DEMO.vtt";
+
+import { setMenuHide } from "../../slices/menuSlice";
 import soundGif from "../../assets/sound.gif";
 import soundOff from "../../assets/soundOff.png";
-import tekst2 from "../../assets/video/TEKST_2.mp4";
-import manVideo from "../../assets/video/MAN.mp4";
-import vrouwVideo from "../../assets/video/VROUW.mp4";
-import Lowerthirds from "../Lowerthirds/Lowerthird";
+import gsap from "gsap";
 
 const axios = require("axios").default;
 
@@ -30,18 +24,14 @@ function Player() {
   const facebookID = useSelector((state) => state.data.facebook.id);
   const facebookGender = useSelector((state) => state.data.facebook.gender);
   const phoneNumber = useSelector((state) => state.data.phonenumber);
-  const holdAndContinueButton = useSelector(
-    (state) => state.video.holdAndContinueButton
-  );
-  const holdAndContinueButtonActivated = useSelector(
-    (state) => state.video.holdAndContinueButtonActivated
-  );
 
   const [currentVideo, setCurrentVideo] = useState();
   const [sound, setSound] = useState(1); //1 = ON ; 0 = OFF
   const [currentNumber, setCurrentNumber] = useState(0);
 
-  const [firstVideo, setFirstvideo] = useState(manVideo);
+  const [firstVideo, setFirstvideo] = useState(
+    `https://schaamteloos.online/media/TEKST1_MAN.mp4`
+  );
 
   const videos = [
     {
@@ -50,19 +40,23 @@ function Player() {
     },
     {
       scene: "1",
-      url: `https://schaamteloos.online/media/${facebookID}`,
+      url: `https://schaamteloos.online/media/${facebookID}.mp4`,
     },
     {
       scene: "2",
-      url: tekst2,
+      url: `https://schaamteloos.online/media/TEKST2.mp4`,
+    },
+    {
+      scene: "3",
+      url: `https://schaamteloos.online/media/${facebookID}-2.mp4`,
     },
   ];
 
   useEffect(() => {
     if (facebookGender === "male") {
-      setFirstvideo(manVideo);
+      setFirstvideo(`https://schaamteloos.online/media/TEKST1_MAN.mp4`);
     } else if (facebookGender === "female") {
-      setFirstvideo(vrouwVideo);
+      setFirstvideo(`https://schaamteloos.online/media/TEKST1_VROUW.mp4`);
     }
     console.log(videos);
   }, []);
@@ -103,33 +97,6 @@ function Player() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [callStatus]);
 
-  /*   useEffect(() => {
-    if (videoTime >= 15 && videoTime <= 16 && !holdAndContinueButtonActivated) {
-      batch(() => {
-        dispatch(setHoldAndContinueButtonTrue());
-        dispatch(setPlayingStateFalse());
-      });
-      longPress();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [videoTime]); */
-
-  /*   const longPress = useLongPress(
-    () => {
-      batch(() => {
-        dispatch(setPlayingStateTrue());
-        dispatch(setHoldAndContinueButtonFalse());
-        dispatch(setHoldAndContinueButtonActivated());
-      });
-    },
-    {
-      threshold: 2000,
-      captureEvent: true,
-      cancelOnMovement: false,
-      detect: "mouse",
-    }
-  ); */
-
   function call() {
     axios({
       method: "post",
@@ -142,11 +109,29 @@ function Player() {
     });
   }
 
+  useEffect(() => {
+    if (currentNumber === 2) {
+      dispatch(setMenuHide());
+    }
+  });
+
+  function ended() {
+    if (currentNumber === 3) {
+      const tl = gsap.timeline();
+      tl.to("#videoplayer", { opacity: 0, duration: 1.5 });
+      tl.to("#einde1", { opacity: 1, duration: 1 });
+      tl.to("#einde1", { opacity: 0, duration: 1, delay: 2 });
+      tl.to("#einde2", { opacity: 1, duration: 1.5 });
+    } else {
+      setCurrentNumber(currentNumber + 1);
+    }
+  }
+
   return (
     <>
-      <Lowerthirds />
       <ReactPlayer
         url={currentVideo}
+        id="videoplayer"
         playing={videoPlaying}
         preload="auto"
         volume={sound}
@@ -154,24 +139,17 @@ function Player() {
         height="100vh"
         className="player"
         ref={playerRef}
-        /* config={{
-          file: {
-            tracks: [
-              {
-                kind: "subtitles",
-                src: subtitles,
-                srcLang: "nl",
-                default: true,
-              },
-            ],
-          },
-        }}
-        */
-        onEnded={() => setCurrentNumber(currentNumber + 1)}
+        onEnded={() => ended()}
         onProgress={(progress) => {
           videoPlaying && dispatch(setTime(progress.playedSeconds));
         }}
       />
+      <h1 id="einde1" className="einde">
+        HET INTERNET VERGEET NIKS,
+      </h1>
+      <h1 id="einde2" className="einde">
+        WEES NIET SCHAAMTELOOS ONLINE!
+      </h1>
       {sound === 1 ? (
         <img
           src={soundGif}
@@ -199,14 +177,6 @@ function Player() {
           }}
         />
       )}
-
-      {/* {holdAndContinueButton && !holdAndContinueButtonActivated ? (
-        <button {...longPress()} className="longPressButton">
-          Hold to continue
-        </button>
-      ) : (
-        <></>
-      )} */}
     </>
   );
 }
