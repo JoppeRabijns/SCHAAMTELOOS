@@ -11,7 +11,6 @@ import json
 ################
 import sys
 
-
 searchname = sys.argv[1]
 
 while True:
@@ -49,11 +48,13 @@ while True:
     education_loc = soup.find('div',id='education')
     education_sibling = education_loc.find_next_siblings("div")[1]
     education_enitity =  education_sibling.find("div", {'class': 'pvs-entity'})
-    education = education_enitity.get_text().strip() 
+    education_school_name = education_enitity.find("span",{'class': 'mr1'})
+    education_school_name_first = education_school_name.find("span",{'class': 'visually-hidden'})
+    education =  education_school_name_first.get_text().strip() 
     experience_loc = soup.find('div',id='experience')
     experience_sibling = experience_loc.find_next_siblings("div")[1]
     experience_enitity =  experience_sibling.find("div", {'class': 'pvs-entity'})
-    experience = experience_enitity.get_text().strip() 
+    experience =  experience_enitity.get_text().strip() 
     linkedIn_data = {
       "name": name,
       "tagline": tagline,
