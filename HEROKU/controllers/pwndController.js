@@ -7,20 +7,15 @@ const getPwnd = (req, res) => {
     },
   };
   let email = req.body.email;
-
-  (async () => {
-    let apiRes = null;
-    try {
-      apiRes = await axios.get(
-        `https://haveibeenpwned.com/api/v3/breachedaccount/${email}?truncateResponse=false&includeUnverified=false`,
-        config
-      );
-    } catch (err) {
-      res.sendStatus(err);
-    } finally {
-      res.send(apiRes.data);
-    }
-  })();
+  axios
+    .get(
+      `https://haveibeenpwned.com/api/v3/breachedaccount/${email}?truncateResponse=false&includeUnverified=false`,
+      config
+    )
+    .then((response) => res.send(response.data))
+    .catch(() => {
+      res.sendStatus(404);
+    });
 };
 
 module.exports = { getPwnd };
