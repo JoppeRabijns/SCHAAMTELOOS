@@ -11,14 +11,14 @@ const render = (req, res) => {
 
   axios
     .post(`http://84.195.15.105:4000/render`, {
-      facebook,
-      fingerprint,
-      linkedIn,
-      strava,
-      spotify,
-      instagram,
+      facebook: facebook,
+      fingerprint: fingerprint,
+      linkedIn: linkedIn,
+      strava: strava,
+      spotify:spotify,
+      instagram: instagram,
     })
-    .then((response) => res.send(response));
+    .then((response) => res.send(response.data));
 };
 
 module.exports = { render };
