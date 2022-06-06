@@ -6,21 +6,30 @@ import gsap from "gsap";
 
 const axios = require("axios").default;
 
-function Pwnd(props) {
-  const [pwnd, setPwnd] = useState();
+function Pwnd() {
+  const [pwnd, setPwnd] = useState(false);
+  const [notPwnd, setnotPwdn] = useState(false);
+
   const [animationDone, setAnimationDone] = useState(false);
   const userPhonenumber = useSelector((state) => state.data.phonenumber);
+  const email = useSelector((state) => state.data.facebook.email);
 
   useEffect(() => {
+    console.log(email);
     axios({
       method: "post",
       url: "https://schaamteloos.herokuapp.com/pwnd",
       data: {
-        email: props.email,
+        email: email,
       },
-    }).then(function (response) {
-      setPwnd(response.data);
-    });
+    })
+      .then(function (response) {
+        setPwnd(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        setnotPwdn(true);
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -57,7 +66,6 @@ function Pwnd(props) {
 
   const handlePwnd = () => {
     return pwnd.map((data) => {
-      console.log(data);
       return (
         <div key={data.Name} className="pwndCard">
           <div className="image">
@@ -79,9 +87,14 @@ function Pwnd(props) {
       <h2 id="tekst2">
         Websites waarbij data gelekt is van het e-mailadres of telefoon nummer:
         <br />
-        {props.email} of {userPhonenumber}
+        {email} of {userPhonenumber}
       </h2>
       {pwnd && animationDone && powned()}
+      {notPwnd && animationDone ? (
+        <h2>Proficiat, er werden geen datalekken gevonden!</h2>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

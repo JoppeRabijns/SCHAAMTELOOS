@@ -28,7 +28,6 @@ function Loading() {
 
   const dispatch = useDispatch();
   const name = useSelector((state) => state.data.facebook.name);
-  const email = useSelector((state) => state.data.facebook.email);
   const scrapingFinished = useSelector((state) => state.data.scrapingFinished);
   /*   const scrapingData = useSelector((state) => state.data);*/
 
@@ -93,7 +92,7 @@ function Loading() {
 
   return (
     <div className="loading">
-      <Pwnd email={email} />
+      <Pwnd />
       <Nexrender />
       <Progressbar />
     </div>

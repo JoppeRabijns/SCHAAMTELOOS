@@ -161,7 +161,7 @@ const all = async (res, data) => {
         type: "data",
         layerName: "MOMENTEEL",
         property: "Source Text",
-        value: `${data.fingerprint.ipLocation.city.name}`,
+        value: `Omgeving van ${data.fingerprint.ipLocation.city.name}`,
         composition: "ALL->PANCARTE",
       },
       {
@@ -278,7 +278,7 @@ const end = async (res, data) => {
         type: "data",
         layerName: "MOMENTEEL",
         property: "Source Text",
-        value: `${data.fingerprint.ipLocation.city.name}`,
+        value: `Omgeving van ${data.fingerprint.ipLocation.city.name}`,
         composition: "END->PANCARTE",
       },
       {
@@ -300,7 +300,7 @@ const end = async (res, data) => {
         layerName: "FOTO",
         src: `${data.facebook.picture.data.url}`,
         composition: "END->PANCARTE->FOTO",
-      }
+      },
     ],
     actions: {
       postrender: [
