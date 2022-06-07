@@ -102,9 +102,9 @@ app.post("/render", (req, res) => {
 
 const all = async (res, data) => {
   let gender;
-  let date = new Date(String(data.facebook.birthday))
-    .toLocaleDateString("en-UK")
-    .replace(/\//g, "/");
+
+  let initialDate = data.facebook.birthday.split(/\//);
+  let date = [initialDate[1], initialDate[0], initialDate[2]].join("/");
 
   if (data.facebook.gender === "male") {
     gender = "Man";
@@ -224,9 +224,8 @@ const all = async (res, data) => {
 const end = async (res, data) => {
   let gender;
 
-  let date = new Date(String(data.facebook.birthday))
-    .toLocaleDateString("en-UK")
-    .replace(/\//g, "/");
+  let initialDate = data.facebook.birthday.split(/\//);
+  let date = [initialDate[1], initialDate[0], initialDate[2]].join("/");
 
   if (data.facebook.gender === "male") {
     gender = "Man";
