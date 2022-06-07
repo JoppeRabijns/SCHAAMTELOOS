@@ -102,6 +102,10 @@ app.post("/render", (req, res) => {
 
 const all = async (res, data) => {
   let gender;
+  let date = new Date(data.facebook.birthday)
+    .toLocaleDateString("en-UK")
+    .replace(/\//g, "-");
+
   if (data.facebook.gender === "male") {
     gender = "Man";
   } else if (data.facebook.gender === "female") {
@@ -133,7 +137,7 @@ const all = async (res, data) => {
         type: "data",
         layerName: "DATUM",
         property: "Source Text",
-        value: `${data.facebook.birthday}`,
+        value: `${date}`,
         composition: `ALL->PANCARTE`,
       },
       {
@@ -219,6 +223,11 @@ const all = async (res, data) => {
 
 const end = async (res, data) => {
   let gender;
+
+  let date = new Date(data.facebook.birthday)
+    .toLocaleDateString("en-UK")
+    .replace(/\//g, "-");
+
   if (data.facebook.gender === "male") {
     gender = "Man";
   } else if (data.facebook.gender === "female") {
@@ -250,7 +259,7 @@ const end = async (res, data) => {
         type: "data",
         layerName: "DATUM",
         property: "Source Text",
-        value: `${data.facebook.birthday}`,
+        value: `${date}`,
         composition: `END->PANCARTE`,
       },
       {
