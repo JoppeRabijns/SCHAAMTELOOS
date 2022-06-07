@@ -37,18 +37,24 @@ def bs4(driver):
   name = name_loc.get_text().strip() 
   tagline_loc = intro.find("div", {'class': 'text-body-medium'})
   tagline = tagline_loc.get_text().strip() 
+
+  """eductation"""
   education_loc = soup.find('div',id='education')
   education_sibling = education_loc.find_next_siblings("div")[1]
   education_enitity =  education_sibling.find("div", {'class': 'pvs-entity'})
   education_school_name = education_enitity.find("span",{'class': 'mr1'})
   education_school_name_first = education_school_name.find("span",{'class': 'visually-hidden'})
   education =  education_school_name_first.get_text().strip() 
+
+  """experience"""
   experience_loc = soup.find('div',id='experience')
   experience_sibling = experience_loc.find_next_siblings("div")[1]
   experience_enitity =  experience_sibling.find("div", {'class': 'pvs-entity'})
   experience_name = experience_enitity.find("span",{'class': 't-14'})
   experience_name_first = experience_name.find("span",{'class': 'visually-hidden'})
   experience =  experience_name_first.get_text().strip().split('\u00b7')[0] 
+
+  """all data"""
   linkedIn_data = {
     "name": name,
     "tagline": tagline,
