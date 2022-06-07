@@ -130,7 +130,7 @@ const all = async (res, data) => {
         type: "data",
         layerName: "WOONPLAATS",
         property: "Source Text",
-        value: `${data.fingerprint.ipLocation.city.name}`,
+        value: `${data.facebook.hometown.name}`,
         composition: `ALL->PANCARTE`,
       },
       {
@@ -251,7 +251,7 @@ const end = async (res, data) => {
         type: "data",
         layerName: "WOONPLAATS",
         property: "Source Text",
-        value: `${data.fingerprint.ipLocation.city.name}`,
+        value: `${data.facebook.hometown.name}`,
         composition: `END->PANCARTE`,
       },
       {
