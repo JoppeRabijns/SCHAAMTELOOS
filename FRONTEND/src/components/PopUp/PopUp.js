@@ -1,5 +1,5 @@
 import "./PopUp.scss";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { Smartphone, Volume2 } from "react-feather";
 import { useNavigate } from "react-router-dom";
@@ -17,6 +17,7 @@ function PopUp() {
     /^(((\+|00)32[ ]?(?:\(0\)[ ]?)?)|0){1}(4(60|[789]\d)\/?(\s?\d{2}\.?){2}(\s?\d{2})|(\d\/?\s?\d{3}|\d{2}\/?\s?\d{2})(\.?\s?\d{2}){2})$/gm;
 
   const handleInput = (e) => {
+    console.log();
     if (e.target.value.match(phonenumberRegex)) {
       dispatch(setPhonenumber(e.target.value));
       setDoorgaan(true);

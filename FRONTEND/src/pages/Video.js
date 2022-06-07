@@ -4,11 +4,12 @@ import { useSelector } from "react-redux";
 
 function Video() {
   const menuHide = useSelector((state) => state.menu.menuHide);
+  const facebookGender = useSelector((state) => state.data.facebook.gender);
 
   return (
     <div className="App">
       {menuHide ? <></> : <Menu />}
-      <Player />
+      <Player gender={facebookGender} />
     </div>
   );
 }

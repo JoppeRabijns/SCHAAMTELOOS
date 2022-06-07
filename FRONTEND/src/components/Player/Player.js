@@ -15,28 +15,23 @@ import gsap from "gsap";
 
 const axios = require("axios").default;
 
-function Player() {
+function Player({ gender }) {
   const playerRef = useRef();
   const dispatch = useDispatch();
   const callStatus = useSelector((state) => state.call.status);
   const videoPlaying = useSelector((state) => state.video.playing);
   const videoTime = useSelector((state) => state.video.time);
   const facebookID = useSelector((state) => state.data.facebook.id);
-  const facebookGender = useSelector((state) => state.data.facebook.gender);
   const phoneNumber = useSelector((state) => state.data.phonenumber);
 
   const [currentVideo, setCurrentVideo] = useState();
   const [sound, setSound] = useState(1); //1 = ON ; 0 = OFF
   const [currentNumber, setCurrentNumber] = useState(0);
 
-  const [firstVideo, setFirstvideo] = useState(
-    `https://schaamteloos.online/media/TEKST1_MAN.mp4`
-  );
-
   const videos = [
     {
       scene: "0",
-      url: firstVideo,
+      url: `https://schaamteloos.online/media/TEKST1_${gender}.mp4`,
     },
     {
       scene: "1",
@@ -51,15 +46,6 @@ function Player() {
       url: `https://schaamteloos.online/media/${facebookID}-2.mp4`,
     },
   ];
-
-  useEffect(() => {
-    if (facebookGender === "male") {
-      setFirstvideo(`https://schaamteloos.online/media/TEKST1_MAN.mp4`);
-    } else if (facebookGender === "female") {
-      setFirstvideo(`https://schaamteloos.online/media/TEKST1_VROUW.mp4`);
-    }
-    console.log(videos);
-  }, []);
 
   useEffect(() => {
     if (currentNumber < videos.length) {
@@ -152,13 +138,14 @@ function Player() {
       <h1 id="einde2" className="einde">
         WEES NIET SCHAAMTELOOS ONLINE!
       </h1>
-      <button
-        id="terugnaarhome"
-        className="terugnaarhome"
-        onClick={() => window.location.reload()}
-      >
-        Terug naar home
-      </button>
+      <div id="terugnaarhome">
+        <button
+          className="terugnaarhome"
+          onClick={() => window.location.reload()}
+        >
+          Terug naar home
+        </button>
+      </div>
       {sound === 1 ? (
         <img
           src={soundGif}
