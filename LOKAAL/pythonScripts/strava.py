@@ -1,3 +1,4 @@
+from glob import glob
 from selenium import webdriver 
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
@@ -6,7 +7,7 @@ import time
 import json
 import sys
 
-searchname = sys.argv[1]
+searchname = "joppe rabijns"
 
 def selenium_latest_image(driver, searchname):
   driver.get("https://www.strava.com/login")
@@ -35,6 +36,9 @@ def bs4_latest_image(driver):
   athlete_pictures = soup.find('ul', {'class': 'MediaThumbnailList--list--boXGW'})
   global picture
   picture = athlete_pictures.find("img")["src"]
+  club_name = soup.find('ul', {'class': 'clubs'})
+  global club
+  club = club_name.find("img")["alt"]
 
 def selenium_2(driver):
   driver.get(driver.current_url + "/follows?type=following")
@@ -60,6 +64,7 @@ while True:
     bs4_follower(driver)
     strava_data = {
     "latest_image": picture,
+    "club": club,
     "follower": follower,
     }
     print(json.dumps(strava_data))
