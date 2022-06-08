@@ -5,7 +5,7 @@ import time
 import json
 import sys
 
-searchname = "joppe rabijns"
+searchname = sys.argv[1]
 
 def selenium(driver, searchname):
   driver.get("https://www.instagram.com/")
