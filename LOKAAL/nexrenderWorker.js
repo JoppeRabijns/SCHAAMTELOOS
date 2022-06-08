@@ -10,7 +10,7 @@ const main = async () => {
     skipCleanup: false,
     addLicense: false,
     debug: true,
-    polling: 10000,
+    polling: 15000,
   });
 };
 
