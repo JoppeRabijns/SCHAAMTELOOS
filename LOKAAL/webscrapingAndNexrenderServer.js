@@ -55,36 +55,6 @@ app.post("/spotify", (req, res) => {
   });
 });
 
-//https://stackoverflow.com/questions/66257999/res-many-videos-nodejs
-app.get("/getVideo", (req, res) => {
-  const path = `/Users/joppe.rabijns/Desktop/Finalwork_Nexrender_Outputs/${req.query.facebookID}.mp4`;
-  const stat = fs.statSync(path);
-  const fileSize = stat.size;
-  const range = req.headers.range;
-  if (range) {
-    const parts = range.replace(/bytes=/, "").split("-");
-    const start = parseInt(parts[0], 10);
-    const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
-    const chunksize = end - start + 1;
-    const file = fs.createReadStream(path, { start, end });
-    const head = {
-      "Content-Range": `bytes ${start}-${end}/${fileSize}`,
-      "Accept-Ranges": "bytes",
-      "Content-Length": chunksize,
-      "Content-Type": "video/mp4",
-    };
-    res.writeHead(206, head);
-    file.pipe(res);
-  } else {
-    const head = {
-      "Content-Length": fileSize,
-      "Content-Type": "video/mp4",
-    };
-    res.writeHead(200, head);
-    fs.createReadStream(path).pipe(res);
-  }
-});
-
 app.post("/render", (req, res) => {
   let data = {
     facebook: req.body.facebook,
@@ -102,7 +72,6 @@ app.post("/render", (req, res) => {
 
 const all = async (res, data) => {
   let gender;
-  let hometown;
   let initialDate = data.facebook.birthday.split(/\//);
   let date = [initialDate[1], initialDate[0], initialDate[2]].join("/");
 
@@ -110,12 +79,6 @@ const all = async (res, data) => {
     gender = "Man";
   } else if (data.facebook.gender === "female") {
     gender = "Vrouw";
-  }
-
-  if (data.facebook.hometown.name) {
-    hometown = data.facebook.hometown.name.split(",")[0];
-  } else {
-    hometown = "undefined";
   }
 
   const result = await client.addJob({
@@ -133,13 +96,7 @@ const all = async (res, data) => {
         value: `${data.facebook.name}`,
         composition: `ALL->PANCARTE`,
       },
-      {
-        type: "data",
-        layerName: "WOONPLAATS",
-        property: "Source Text",
-        value: `${hometown}`,
-        composition: `ALL->PANCARTE`,
-      },
+      
       {
         type: "data",
         layerName: "DATUM",
@@ -230,7 +187,6 @@ const all = async (res, data) => {
 
 const end = async (res, data) => {
   let gender;
-  let hometown;
 
   let initialDate = data.facebook.birthday.split(/\//);
   let date = [initialDate[1], initialDate[0], initialDate[2]].join("/");
@@ -241,11 +197,6 @@ const end = async (res, data) => {
     gender = "Vrouw";
   }
 
-  if (data.facebook.hometown.name) {
-    hometown = data.facebook.hometown.name.split(",")[0];
-  } else {
-    hometown = "undefined";
-  }
 
   const result = await client.addJob({
     template: {
@@ -260,13 +211,6 @@ const end = async (res, data) => {
         layerName: "NAAM",
         property: "Source Text",
         value: `${data.facebook.name}`,
-        composition: `END->PANCARTE`,
-      },
-      {
-        type: "data",
-        layerName: "WOONPLAATS",
-        property: "Source Text",
-        value: `${data.facebook.hometown.name.split(",")[0]}`,
         composition: `END->PANCARTE`,
       },
       {
