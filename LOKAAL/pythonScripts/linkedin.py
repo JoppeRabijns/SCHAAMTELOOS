@@ -54,12 +54,16 @@ def bs4(driver):
   experience_name_first = experience_name.find("span",{'class': 'visually-hidden'})
   experience =  experience_name_first.get_text().strip().split('\u00b7')[0] 
 
+  """image"""
+  image = soup.find("img", {'class': 'pv-top-card-profile-picture__image'})["src"]
+
   """all data"""
   linkedIn_data = {
     "name": name,
     "tagline": tagline,
     "education": education,
-    "experience": experience
+    "experience": experience,
+    "picture": image
   }
   print(json.dumps(linkedIn_data))  
 
