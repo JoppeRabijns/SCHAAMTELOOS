@@ -102,7 +102,7 @@ app.post("/render", (req, res) => {
 
 const all = async (res, data) => {
   let gender;
-
+  let hometown;
   let initialDate = data.facebook.birthday.split(/\//);
   let date = [initialDate[1], initialDate[0], initialDate[2]].join("/");
 
@@ -111,6 +111,13 @@ const all = async (res, data) => {
   } else if (data.facebook.gender === "female") {
     gender = "Vrouw";
   }
+
+  if (data.facebook.hometown.name) {
+    hometown = data.facebook.hometown.name.split(",")[0];
+  } else {
+    hometown = "undefined";
+  }
+
   const result = await client.addJob({
     template: {
       src: `file:///Users/joppe.rabijns/Desktop/NEXRENDER_V1/1080p_Tracking.aep`,
@@ -130,7 +137,7 @@ const all = async (res, data) => {
         type: "data",
         layerName: "WOONPLAATS",
         property: "Source Text",
-        value: `${data.facebook.hometown.name.split(',')[0]}`,
+        value: `${hometown}`,
         composition: `ALL->PANCARTE`,
       },
       {
@@ -223,6 +230,7 @@ const all = async (res, data) => {
 
 const end = async (res, data) => {
   let gender;
+  let hometown;
 
   let initialDate = data.facebook.birthday.split(/\//);
   let date = [initialDate[1], initialDate[0], initialDate[2]].join("/");
@@ -232,6 +240,13 @@ const end = async (res, data) => {
   } else if (data.facebook.gender === "female") {
     gender = "Vrouw";
   }
+
+  if (data.facebook.hometown.name) {
+    hometown = data.facebook.hometown.name.split(",")[0];
+  } else {
+    hometown = "undefined";
+  }
+
   const result = await client.addJob({
     template: {
       src: `file:///Users/joppe.rabijns/Desktop/NEXRENDER_V1/1080p_Tracking.aep`,
@@ -251,7 +266,7 @@ const end = async (res, data) => {
         type: "data",
         layerName: "WOONPLAATS",
         property: "Source Text",
-        value: `${data.facebook.hometown.name.split(',')[0]}`,
+        value: `${data.facebook.hometown.name.split(",")[0]}`,
         composition: `END->PANCARTE`,
       },
       {

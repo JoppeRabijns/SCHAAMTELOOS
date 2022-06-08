@@ -6,13 +6,13 @@ import time
 import json
 import sys
 
-searchname = sys.argv[1]
+searchname = "joppe rabijns"
 
 def selenium(driver, searchname):
   driver.get("https://linkedin.com/login")
   time.sleep(2)
   username = driver.find_element_by_id("username")
-  username.send_keys("joppe@rabijns.be")   
+  username.send_keys("hello@adequaat.media")   
   pword = driver.find_element_by_id("password")
   pword.send_keys("!cpnexkQ6")        
   driver.find_element_by_xpath("//button[@type='submit']").click()
@@ -20,11 +20,11 @@ def selenium(driver, searchname):
   driver.find_element_by_class_name("search-global-typeahead__input").click()
   time.sleep(2)
   driver.find_element_by_class_name("search-global-typeahead__input").click()
-  time.sleep(2)
+  time.sleep(1)
   search = driver.find_element_by_class_name("search-global-typeahead__input")
   search.send_keys(searchname)  
   search.send_keys(Keys.ENTER)
-  time.sleep(4)
+  time.sleep(3)
   result = driver.find_element_by_id('main')
   result.find_element_by_tag_name('img').click()
 
@@ -46,15 +46,30 @@ def bs4(driver):
   education =  education_school_name_first.get_text().strip() 
 
   """experience"""
+  global experience
   experience_loc = soup.find('div',id='experience')
   experience_sibling = experience_loc.find_next_siblings("div")[1]
   experience_enitity =  experience_sibling.find("div", {'class': 'pvs-entity'})
-  experience_name = experience_enitity.find("span",{'class': 't-14'})
-  experience_name_first = experience_name.find("span",{'class': 'visually-hidden'})
-  experience =  experience_name_first.get_text().strip().split('\u00b7')[0] 
+
+  while True:
+    try:
+     experience_name = experience_enitity.find_all('a',{"class":'optional-action-target-wrapper'})[1]
+     experience_span = experience_name.find_all('span',{"class": 'mr1'})
+     experience = experience_span.get_text().strip()
+     print('try')
+     break
+    except:
+     experience_name1 = experience_enitity.find("span",{'class': 't-14'})
+     experience_name_first1 = experience_name1.find("span",{'class': 'visually-hidden'})
+     experience =  experience_name_first1.get_text().strip().split('\u00b7')[0] 
+    print('except')
+    break
+
+  print(experience)
 
   """image"""
   image = soup.find("img", {'class': 'pv-top-card-profile-picture__image'})["src"]
+  print(experience)
 
   """all data"""
   linkedIn_data = {
@@ -64,6 +79,8 @@ def bs4(driver):
     "experience": experience,
     "picture": image
   }
+  print(experience)
+
   print(json.dumps(linkedIn_data))  
 
 while True:
