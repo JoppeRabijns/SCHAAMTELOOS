@@ -7,7 +7,6 @@ import {
   setPlayingStateFalse,
   setTime,
 } from "../../slices/videoSlice";
-
 import { setMenuHide } from "../../slices/menuSlice";
 import soundGif from "../../assets/sound.gif";
 import soundOff from "../../assets/soundOff.png";
@@ -55,6 +54,38 @@ function Player({ gender }) {
   }, [currentNumber]);
 
   useEffect(() => {
+    if (currentNumber === 1) {
+      console.log(currentNumber);
+      window.addEventListener("keydown", (e) => {
+        if (e.code === "Space") {
+          dispatch(setPlayingStateFalse());
+        }
+      });
+      window.addEventListener("keyup", (e) => {
+        if (e.code === "Space") {
+          dispatch(setPlayingStateTrue());
+        }
+      });
+    }
+  });
+
+  useEffect(() => {
+    if (currentNumber === 3) {
+      console.log(currentNumber);
+      window.addEventListener("keydown", (e) => {
+        if (e.code === "Space") {
+          dispatch(setPlayingStateFalse());
+        }
+      });
+      window.addEventListener("keyup", (e) => {
+        if (e.code === "Space") {
+          dispatch(setPlayingStateTrue());
+        }
+      });
+    }
+  });
+
+  useEffect(() => {
     if (currentNumber === 2 && videoTime >= 5 && videoTime <= 6) {
       if (callStatus === "not initiated") {
         call();
@@ -99,7 +130,8 @@ function Player({ gender }) {
     if (currentNumber === 2) {
       dispatch(setMenuHide());
     }
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentNumber]);
 
   function ended() {
     if (currentNumber === 3) {
@@ -125,7 +157,7 @@ function Player({ gender }) {
         volume={sound}
         width="100vw"
         height="100vh"
-        className="player"
+        className={"player"}
         ref={playerRef}
         onEnded={() => ended()}
         onProgress={(progress) => {

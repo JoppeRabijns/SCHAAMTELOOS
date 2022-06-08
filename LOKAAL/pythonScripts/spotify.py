@@ -6,7 +6,7 @@ import time
 import json
 import sys
 
-searchname = "stefan tilburgs"
+searchname = sys.argv[1]
 
 def selenium(driver, searchname):
   driver.get("https://open.spotify.com/search")
