@@ -7,28 +7,28 @@ import time
 import json
 import sys
 
-searchname = sys.argv[1]
+searchname = "joppe rabijns"
 
 def selenium_latest_image(driver, searchname):
   driver.get("https://www.strava.com/login")
-  time.sleep(2)
+  time.sleep(1)
   username = driver.find_element_by_id("email")
   username.send_keys("joppe.rabijns@gmail.com")  
   pword = driver.find_element_by_id("password")
   pword.send_keys("E-vBi*St,-S2?dE")        
   driver.find_element_by_id("login-button").click()
-  time.sleep(2)
+  time.sleep(1)
   driver.find_element_by_id("open-global-search-button").click()
   time.sleep(1)
   search = driver.find_element_by_id("global-search-field")
   search.send_keys(searchname)  
   time.sleep(1)
   driver.find_element_by_id("global-search-button").click()
-  time.sleep(2)
+  time.sleep(1)
   driver.find_element_by_class_name("text-headline").click()
-  time.sleep(2)
+  time.sleep(1)
   driver.find_element_by_class_name("athlete-search").find_element_by_tag_name('a').click()
-  time.sleep(2)
+  time.sleep(1)
 
 def bs4_latest_image(driver):
   src = driver.page_source
@@ -42,7 +42,7 @@ def bs4_latest_image(driver):
 
 def selenium_2(driver):
   driver.get(driver.current_url + "/follows?type=following")
-  time.sleep(2)
+  time.sleep(1)
 
 def bs4_follower(driver):
   src = driver.page_source

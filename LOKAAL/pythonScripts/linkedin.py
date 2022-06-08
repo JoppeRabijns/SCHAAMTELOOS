@@ -27,7 +27,6 @@ def selenium(driver, searchname):
   time.sleep(4)
   result = driver.find_element_by_id('main')
   result.find_element_by_tag_name('img').click()
-  time.sleep(3)
 
 def bs4(driver):
   src = driver.page_source
@@ -74,6 +73,7 @@ while True:
     driver_path = '/Applications/chromedriver'
     driver = webdriver.Chrome(options = options, executable_path = driver_path)
     selenium(driver, searchname)
+    time.sleep(3)
     bs4(driver)
     break
   except:
