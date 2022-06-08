@@ -5,7 +5,7 @@ import time
 import json
 import sys
 
-searchname = "joppe rabijns"
+searchname = sys.argv[1]
 
 def selenium(driver, searchname):
   driver.get("https://www.instagram.com/")
@@ -22,7 +22,7 @@ def selenium(driver, searchname):
   search.send_keys(searchname)
   time.sleep(2)
   driver.find_elements_by_class_name("-qQT3")[0].click()
-  time.sleep(3) 
+  time.sleep(4) 
   images=[]
   for image in driver.find_elements_by_class_name('_aagv'):
     images.append(image.find_element_by_tag_name('img').get_attribute('src'))

@@ -7,7 +7,7 @@ import time
 import json
 import sys
 
-searchname = "joppe rabijns"
+searchname = sys.argv[1]
 
 def selenium_latest_image(driver, searchname):
   driver.get("https://www.strava.com/login")

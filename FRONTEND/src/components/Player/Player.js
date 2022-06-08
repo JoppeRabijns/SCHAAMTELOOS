@@ -28,27 +28,15 @@ function Player({ gender }) {
   const [currentNumber, setCurrentNumber] = useState(0);
 
   const videos = [
-    {
-      scene: "0",
-      url: `https://schaamteloos.online/media/TEKST1_${gender}.mp4`,
-    },
-    {
-      scene: "1",
-      url: `https://schaamteloos.online/media/${facebookID}.mp4`,
-    },
-    {
-      scene: "2",
-      url: `https://schaamteloos.online/media/TEKST2.mp4`,
-    },
-    {
-      scene: "3",
-      url: `https://schaamteloos.online/media/${facebookID}-2.mp4`,
-    },
+    `https://schaamteloos.online/media/TEKST1_${gender}.mp4`,
+    `https://schaamteloos.online/media/${facebookID}.mp4`,
+    `https://schaamteloos.online/media/TEKST2.mp4`,
+    `https://schaamteloos.online/media/${facebookID}-2.mp4`,
   ];
 
   useEffect(() => {
     if (currentNumber < videos.length) {
-      setCurrentVideo(videos[currentNumber].url);
+      setCurrentVideo(videos[currentNumber]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentNumber]);
