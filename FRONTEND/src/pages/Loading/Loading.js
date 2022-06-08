@@ -34,9 +34,15 @@ function Loading() {
   useEffect(() => {
     if (!scrapingFinished) {
       getLinkedIn();
-      getSpotify();
-      getStrava();
-      getInstagram();
+      setTimeout(() => {
+        getSpotify();
+      }, 5000);
+      setTimeout(() => {
+        getStrava();
+      }, 10000);
+      setTimeout(() => {
+        getInstagram();
+      }, 15000);
       dispatch(setScrapingFinishedTrue());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
