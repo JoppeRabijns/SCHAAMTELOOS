@@ -56,20 +56,15 @@ def bs4(driver):
      experience_name = experience_enitity.find_all('a',{"class":'optional-action-target-wrapper'})[1]
      experience_span = experience_name.find_all('span',{"class": 'mr1'})
      experience = experience_span.get_text().strip()
-     print('try')
      break
     except:
      experience_name1 = experience_enitity.find("span",{'class': 't-14'})
      experience_name_first1 = experience_name1.find("span",{'class': 'visually-hidden'})
      experience =  experience_name_first1.get_text().strip().split('\u00b7')[0] 
-    print('except')
     break
-
-  print(experience)
 
   """image"""
   image = soup.find("img", {'class': 'pv-top-card-profile-picture__image'})["src"]
-  print(experience)
 
   """all data"""
   linkedIn_data = {
