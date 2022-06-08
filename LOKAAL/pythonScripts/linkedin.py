@@ -10,7 +10,7 @@ searchname = sys.argv[1]
 
 def selenium(driver, searchname):
   driver.get("https://linkedin.com/login")
-  time.sleep(1)
+  time.sleep(2)
   username = driver.find_element_by_id("username")
   username.send_keys("joppe@rabijns.be")   
   pword = driver.find_element_by_id("password")
@@ -18,16 +18,16 @@ def selenium(driver, searchname):
   driver.find_element_by_xpath("//button[@type='submit']").click()
   time.sleep(2)
   driver.find_element_by_class_name("search-global-typeahead__input").click()
-  time.sleep(1)
+  time.sleep(2)
   driver.find_element_by_class_name("search-global-typeahead__input").click()
   time.sleep(2)
   search = driver.find_element_by_class_name("search-global-typeahead__input")
   search.send_keys(searchname)  
   search.send_keys(Keys.ENTER)
-  time.sleep(2)
+  time.sleep(4)
   result = driver.find_element_by_id('main')
   result.find_element_by_tag_name('img').click()
-  time.sleep(1)
+  time.sleep(3)
 
 def bs4(driver):
   src = driver.page_source

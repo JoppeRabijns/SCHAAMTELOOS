@@ -10,6 +10,8 @@ searchname = sys.argv[1]
 def selenium(driver, searchname):
   driver.get("https://www.instagram.com/")
   time.sleep(3)
+  driver.find_element_by_class_name("HoLwm").click()
+  time.sleep(3)
   username = driver.find_elements_by_class_name("zyHYP")[0]
   username.send_keys("hello@adequaat.media")   
   pword = driver.find_elements_by_class_name("zyHYP")[1]
@@ -20,7 +22,7 @@ def selenium(driver, searchname):
   time.sleep(2)
   search = driver.find_element_by_class_name("XTCLo")
   search.send_keys(searchname)
-  time.sleep(2)
+  time.sleep(3)
   driver.find_elements_by_class_name("-qQT3")[0].click()
   time.sleep(4) 
   images=[]
