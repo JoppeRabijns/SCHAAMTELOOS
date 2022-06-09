@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useRef } from "react";
 import "./Player.scss";
 import ReactPlayer from "react-player";
@@ -34,15 +35,22 @@ function Player({ gender }) {
     `https://schaamteloos.online/media/${facebookID}-2.mp4`,
   ];
 
+  /**
+   * Set current video
+   */
   useEffect(() => {
     if (currentNumber < videos.length) {
       setCurrentVideo(videos[currentNumber]);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentNumber]);
 
+  /**
+   * Pause video on spacebar down
+   */
+
+  /*
   useEffect(() => {
-    if (currentNumber === 1) {
+    if (currentNumber === 1 || currentNumber === 3) {
       console.log(currentNumber);
       window.addEventListener("keydown", (e) => {
         if (e.code === "Space") {
@@ -55,24 +63,11 @@ function Player({ gender }) {
         }
       });
     }
-  });
+  }); */
 
-  useEffect(() => {
-    if (currentNumber === 3) {
-      console.log(currentNumber);
-      window.addEventListener("keydown", (e) => {
-        if (e.code === "Space") {
-          dispatch(setPlayingStateFalse());
-        }
-      });
-      window.addEventListener("keyup", (e) => {
-        if (e.code === "Space") {
-          dispatch(setPlayingStateTrue());
-        }
-      });
-    }
-  });
-
+  /**
+   * INITIATE CALL
+   */
   useEffect(() => {
     if (currentNumber === 2 && videoTime >= 5 && videoTime <= 6) {
       if (callStatus === "not initiated") {
@@ -82,26 +77,32 @@ function Player({ gender }) {
         }, 4500);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videoTime, currentNumber]);
 
+  /**
+   *  SEEK TO WHEN CALL IS ANSWERED
+   */
   useEffect(() => {
     console.log(callStatus);
     if (callStatus === "in-progress") {
-      playerRef.current.seekTo(10, "seconds");
+      playerRef.current.seekTo(10.6, "seconds");
       dispatch(setPlayingStateTrue());
       setSound(0);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [callStatus]);
 
+  /**
+   * SOUND ON WHEN CALL IS ENDED
+   */
   useEffect(() => {
     if (callStatus === "completed") {
       setSound(1);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [callStatus]);
 
+  /**
+   * MAKE CALL
+   */
   function call() {
     axios({
       method: "post",
@@ -114,11 +115,13 @@ function Player({ gender }) {
     });
   }
 
+  /**
+   * HIDE MENU
+   */
   useEffect(() => {
     if (currentNumber === 2) {
       dispatch(setMenuHide());
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentNumber]);
 
   function ended() {
@@ -145,7 +148,7 @@ function Player({ gender }) {
         volume={sound}
         width="100vw"
         height="100vh"
-        className={"player"}
+        className="player"
         ref={playerRef}
         onEnded={() => ended()}
         onProgress={(progress) => {
@@ -158,14 +161,13 @@ function Player({ gender }) {
       <h1 id="einde2" className="einde">
         WEES NIET SCHAAMTELOOS ONLINE!
       </h1>
-      <div id="terugnaarhome">
-        <button
-          className="terugnaarhome"
-          onClick={() => window.location.reload()}
-        >
-          Terug naar home
-        </button>
-      </div>
+      <button
+        className="terugnaarhome"
+        id="terugnaarhome"
+        onClick={() => window.location.reload()}
+      >
+        Terug naar home
+      </button>
       {sound === 1 ? (
         <img
           src={soundGif}
