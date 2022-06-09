@@ -129,6 +129,7 @@ app.post("/render", (req, res) => {
 
   console.log(nexrenderData);
 
+
   all(nexrenderData).catch(console.error);
   end(nexrenderData).catch(console.error);
   still(nexrenderData).catch(console.error);
@@ -639,14 +640,14 @@ const still = async (data) => {
       postrender: [
         {
           module: "@nexrender/action-upload",
-          input: "encoded.jpeg",
+          input: "result_00264.jpg",
           provider: "ftp",
           params: {
             host: "ftp.rabijnsbe.webhosting.be",
             port: 21,
             user: "joppe@rabijnsbe",
             password: "VdAkfDA5JvcnFX!",
-            output: `/media/${data.facebook_id}.jpeg`,
+            output: `/media/${data.facebook_id}.jpg`,
           },
         },
       ],
