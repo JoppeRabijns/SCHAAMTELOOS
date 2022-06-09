@@ -94,8 +94,8 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: 55%;
-  transform: translateY(-45%);
+  top: 80%;
+  transform: translateY(-20%);
   text-align: center;
   width: 300px;
   height: auto;
@@ -114,4 +114,17 @@
   color: black;
   background: white;
   transform: scale(1.05);
+}
+
+.stillImage {
+  z-index: 998;
+  opacity: 0;
+  width: 70vw;
+  height: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 10%;
+  margin-left: auto;
+  margin-right: auto;
 }

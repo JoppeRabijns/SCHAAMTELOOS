@@ -161,6 +161,12 @@ function Player({ gender }) {
       <h1 id="einde2" className="einde">
         WEES NIET SCHAAMTELOOS ONLINE!
       </h1>
+      <img
+        src={`https://schaamteloos.online/media/${facebookID}.jpg`}
+        alt=""
+        id="terugnaarhome"
+        className="stillImage"
+      />
       <button
         className="terugnaarhome"
         id="terugnaarhome"
