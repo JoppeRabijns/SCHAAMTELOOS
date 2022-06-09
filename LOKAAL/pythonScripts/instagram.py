@@ -11,7 +11,7 @@ def selenium(driver, searchname):
   driver.get("https://www.instagram.com/")
   while True:
     try:
-      time.sleep(2)
+      time.sleep(1)
       driver.find_element_by_class_name("HoLwm").click()
       time.sleep(2)
       break
@@ -29,7 +29,7 @@ def selenium(driver, searchname):
   search.send_keys(searchname)
   time.sleep(2)
   driver.find_elements_by_class_name("-qQT3")[0].click()
-  time.sleep(6) 
+  time.sleep(8) 
   images=[]
   while True:
     try:
