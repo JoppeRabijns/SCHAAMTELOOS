@@ -79,10 +79,20 @@ app.post("/render", (req, res) => {
 
   function checkUndefinedImage(variable) {
     if (typeof variable == "undefined") {
-      let placeholdeImage = "https://picsum.photos/200/300";
+      let placeholdeImage = "https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png";
       return placeholdeImage;
     } else {
       return variable;
+    }
+  }
+
+
+  function checkUndefinedImageArray(variable, index) {
+    if (typeof variable == "undefined") {
+      let placeholdeImage = "https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png";
+      return placeholdeImage;
+    } else {
+      return variable[index];
     }
   }
 
@@ -102,13 +112,13 @@ app.post("/render", (req, res) => {
     ),
     linkedin_education: checkUndefined(req.body.linkedIn.education),
     linkedin_experience: checkUndefined(req.body.linkedIn.experience),
-    facebook_foto: checkUndefinedImage(req.body.facebook.picture.data.url),
+    facebook_foto: req.body.facebook.picture.data.url,
     instagram_followers_count: checkUndefined(
       req.body.instagram.followers_count
     ),
-    instagram_image_1: checkUndefinedImage(req.body.instagram.images[0]),
-    instagram_image_2: checkUndefinedImage(req.body.instagram.images[1]),
-    instagram_image_3: checkUndefinedImage(req.body.instagram.images[2]),
+    instagram_image_1: checkUndefinedImageArray(req.body.instagram.images, 0),
+    instagram_image_2: checkUndefinedImageArray(req.body.instagram.images, 1),
+    instagram_image_3: checkUndefinedImageArray(req.body.instagram.images, 2),
     strava_image: checkUndefinedImage(req.body.strava.latest_image),
     strava_club: checkUndefined(req.body.strava.club),
     strava_follower: checkUndefined(req.body.strava.follower),
@@ -125,7 +135,7 @@ app.post("/render", (req, res) => {
 const all = async (data) => {
   const result = await client.addJob({
     template: {
-      src: `file:///Users/joppe.rabijns/Desktop/NEXRENDER_V1/1080p_Tracking.aep`,
+      src: `file:///Users/joppe.rabijns/Desktop/V2/1080p_Tracking.aep`,
       composition: `ALL`,
       outputExt: "mov",
       outputModule: "FINALWORK",
@@ -154,7 +164,7 @@ const all = async (data) => {
       },
       {
         type: "data",
-        layerName: "WOONPLAATS",
+        layerName: "STAD",
         property: "Source Text",
         value: `${data.facebook_hometown}`,
         composition: `ALL->PANCARTE`,
@@ -303,7 +313,7 @@ const all = async (data) => {
 const end = async (data) => {
   const result = await client.addJob({
     template: {
-      src: `file:///Users/joppe.rabijns/Desktop/NEXRENDER_V1/1080p_Tracking.aep`,
+      src: `file:///Users/joppe.rabijns/Desktop/V2/1080p_Tracking.aep`,
       composition: `END`,
       outputExt: "mov",
       outputModule: "FINALWORK",
@@ -332,7 +342,7 @@ const end = async (data) => {
       },
       {
         type: "data",
-        layerName: "WOONPLAATS",
+        layerName: "STAD",
         property: "Source Text",
         value: `${data.facebook_hometown}`,
         composition: `END->PANCARTE`,
