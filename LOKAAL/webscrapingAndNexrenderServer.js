@@ -55,50 +55,50 @@ app.post("/spotify", (req, res) => {
 app.post("/render", (req, res) => {
   res.sendStatus(200);
 
-    let gender;
+  let gender;
 
-    let initialDate = req.body.facebook.birthday.split(/\//);
-    let date = [initialDate[1], initialDate[0], initialDate[2]].join("/");
+  let initialDate = req.body.facebook.birthday.split(/\//);
+  let date = [initialDate[1], initialDate[0], initialDate[2]].join("/");
 
-    if (req.body.facebook.gender === "male") {
-      gender = "Man";
-    } else if (req.body.facebook.gender === "female") {
-      gender = "Vrouw";
-    }else{
-      gender = "Man";
+  if (req.body.facebook.gender === "male") {
+    gender = "Man";
+  } else if (req.body.facebook.gender === "female") {
+    gender = "Vrouw";
+  } else {
+    gender = "Man";
+  }
+
+  function checkUndefined(variable) {
+    if (typeof variable == "undefined") {
+      let nothing = "";
+      return nothing;
+    } else {
+      return variable;
     }
+  }
 
-    function checkUndefined(variable){
-      if (typeof variable == "undefined") {
-        let nothing ="";
-        return nothing;
-      }else{
-        return variable;
-      }
-    
-
-    }
-
-   let nexrenderData =  {
-      phonenumber: req.body.phonenumber,
-      facebook_id: req.body.facebook.id,
-      facebook_name: req.body.facebook.name,
-      facebook_gender: gender,
-      facebook_date: date,
-      facebook_hometown: checkUndefined(req.body.facebook.hometown.split(",")[0]),
-      facebook_email: checkUndefined(req.body.facebook.email),
-      fingerprint_momenteel: checkUndefined(req.body.fingerprint.ipLocation.city.name),
-      linkedin_education: checkUndefined(req.body.linkedIn.education),
-      linkedin_experience: checkUndefined(req.body.linkedIn.experience),
-      facebook_foto: checkUndefined(req.body.facebook.picture.data.url),
-      instagram_followers: checkUndefined(req.body.instagram.followers_count),
-      instagram_images: checkUndefined(req.body.instagram.images),
-      strava_image: checkUndefined(req.body.strava.latest_image),
-      strava_club: checkUndefined(req.body.strava.club),
-      strava_follower: checkUndefined(req.body.strava.follower),
-      spotify_follower: checkUndefined(req.body.spotify.follower),
-      spotify_playlist: checkUndefined(req.body.spotify.playlist),
-    };
+  let nexrenderData = {
+    phonenumber: req.body.phonenumber,
+    facebook_id: req.body.facebook.id,
+    facebook_name: req.body.facebook.name,
+    facebook_gender: gender,
+    facebook_date: date,
+    facebook_hometown: checkUndefined(req.body.facebook.hometown.split(",")[0]),
+    facebook_email: checkUndefined(req.body.facebook.email),
+    fingerprint_momenteel: checkUndefined(
+      req.body.fingerprint.ipLocation.city.name
+    ),
+    linkedin_education: checkUndefined(req.body.linkedIn.education),
+    linkedin_experience: checkUndefined(req.body.linkedIn.experience),
+    facebook_foto: checkUndefined(req.body.facebook.picture.data.url),
+    instagram_followers: checkUndefined(req.body.instagram.followers_count),
+    instagram_images: checkUndefined(req.body.instagram.images),
+    strava_image: checkUndefined(req.body.strava.latest_image),
+    strava_club: checkUndefined(req.body.strava.club),
+    strava_follower: checkUndefined(req.body.strava.follower),
+    spotify_follower: checkUndefined(req.body.spotify.follower),
+    spotify_playlist: checkUndefined(req.body.spotify.playlist),
+  };
 
   console.log(nexrenderData);
 
@@ -127,6 +127,13 @@ const all = async (res, data) => {
         layerName: "DATUM",
         property: "Source Text",
         value: `${data.facebook_date}`,
+        composition: `ALL->PANCARTE`,
+      },
+      {
+        type: "data",
+        layerName: "WOONPLAATS",
+        property: "Source Text",
+        value: `${data.facebook_hometown}`,
         composition: `ALL->PANCARTE`,
       },
       {
@@ -231,6 +238,13 @@ const end = async (res, data) => {
         layerName: "DATUM",
         property: "Source Text",
         value: `${data.facebook_date}`,
+        composition: `END->PANCARTE`,
+      },
+      {
+        type: "data",
+        layerName: "WOONPLAATS",
+        property: "Source Text",
+        value: `${data.facebook_hometown}`,
         composition: `END->PANCARTE`,
       },
       {
