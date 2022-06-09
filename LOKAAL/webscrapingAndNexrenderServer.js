@@ -55,7 +55,6 @@ app.post("/spotify", (req, res) => {
 app.post("/render", (req, res) => {
   res.sendStatus(200);
 
-  let nexrenderData = () => {
     let gender;
 
     let initialDate = req.body.facebook.birthday.split(/\//);
@@ -65,28 +64,41 @@ app.post("/render", (req, res) => {
       gender = "Man";
     } else if (req.body.facebook.gender === "female") {
       gender = "Vrouw";
+    }else{
+      gender = "Man";
     }
-    return {
+
+    function checkUndefined(variable){
+      if (typeof variable == "undefined") {
+        let nothing ="";
+        return nothing;
+      }else{
+        return variable;
+      }
+    
+
+    }
+
+   let nexrenderData =  {
       phonenumber: req.body.phonenumber,
       facebook_id: req.body.facebook.id,
       facebook_name: req.body.facebook.name,
       facebook_gender: gender,
       facebook_date: date,
-      facebook_hometown: hometown,
-      facebook_email: req.body.facebook.email,
-      fingerprint_momenteel: req.body.fingerprint.ipLocation.city.name,
-      linkedin_education: req.body.linkedIn.education,
-      linkedin_experience: req.body.linkedIn.experience,
-      facebook_foto: req.body.facebook.picture.data.url,
-      instagram_followers: req.body.instagram.followers_count,
-      instagram_images: req.body.instagram.images,
-      strava_image: req.body.strava.latest_image,
-      strava_club: req.body.strava.club,
-      strava_follower: req.body.strava.follower,
-      spotify_follower: req.body.spotify.follower,
-      spotify_playlist: req.body.spotify.playlist,
+      facebook_hometown: checkUndefined(req.body.facebook.hometown.split(",")[0]),
+      facebook_email: checkUndefined(req.body.facebook.email),
+      fingerprint_momenteel: checkUndefined(req.body.fingerprint.ipLocation.city.name),
+      linkedin_education: checkUndefined(req.body.linkedIn.education),
+      linkedin_experience: checkUndefined(req.body.linkedIn.experience),
+      facebook_foto: checkUndefined(req.body.facebook.picture.data.url),
+      instagram_followers: checkUndefined(req.body.instagram.followers_count),
+      instagram_images: checkUndefined(req.body.instagram.images),
+      strava_image: checkUndefined(req.body.strava.latest_image),
+      strava_club: checkUndefined(req.body.strava.club),
+      strava_follower: checkUndefined(req.body.strava.follower),
+      spotify_follower: checkUndefined(req.body.spotify.follower),
+      spotify_playlist: checkUndefined(req.body.spotify.playlist),
     };
-  };
 
   console.log(nexrenderData);
 

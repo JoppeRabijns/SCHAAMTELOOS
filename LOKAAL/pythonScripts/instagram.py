@@ -43,7 +43,7 @@ def selenium(driver, searchname):
 
   print(json.dumps({
     'images': images,
-    'followers_count': followers_count + 'volgers'
+    'followers_count': followers_count + ' volgers'
   }
     ))
 
