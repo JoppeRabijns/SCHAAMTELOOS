@@ -77,25 +77,39 @@ app.post("/render", (req, res) => {
     }
   }
 
+  function checkUndefinedImage(variable) {
+    if (typeof variable == "undefined") {
+      let placeholdeImage = "https://picsum.photos/200/300";
+      return placeholdeImage;
+    } else {
+      return variable;
+    }
+  }
+
   /*   .split(",")[0] */
 
   let nexrenderData = {
     phonenumber: req.body.phonenumber,
+    fingerprint_ip: req.body.fingerprint.ip,
     facebook_id: req.body.facebook.id,
     facebook_name: req.body.facebook.name,
     facebook_gender: gender,
     facebook_date: date,
-    facebook_hometown: checkUndefined(req.body.facebook.hometown),
+    facebook_hometown: checkUndefined(req.body.facebook.hometown.name),
     facebook_email: checkUndefined(req.body.facebook.email),
     fingerprint_momenteel: checkUndefined(
       req.body.fingerprint.ipLocation.city.name
     ),
     linkedin_education: checkUndefined(req.body.linkedIn.education),
     linkedin_experience: checkUndefined(req.body.linkedIn.experience),
-    facebook_foto: checkUndefined(req.body.facebook.picture.data.url),
-    instagram_followers: checkUndefined(req.body.instagram.followers_count),
-    instagram_images: checkUndefined(req.body.instagram.images),
-    strava_image: checkUndefined(req.body.strava.latest_image),
+    facebook_foto: checkUndefinedImage(req.body.facebook.picture.data.url),
+    instagram_followers_count: checkUndefined(
+      req.body.instagram.followers_count
+    ),
+    instagram_image_1: checkUndefinedImage(req.body.instagram.images[0]),
+    instagram_image_2: checkUndefinedImage(req.body.instagram.images[1]),
+    instagram_image_3: checkUndefinedImage(req.body.instagram.images[2]),
+    strava_image: checkUndefinedImage(req.body.strava.latest_image),
     strava_club: checkUndefined(req.body.strava.club),
     strava_follower: checkUndefined(req.body.strava.follower),
     spotify_follower: checkUndefined(req.body.spotify.follower),
@@ -133,13 +147,6 @@ const all = async (data) => {
       },
       {
         type: "data",
-        layerName: "WOONPLAATS",
-        property: "Source Text",
-        value: `${data.facebook_hometown}`,
-        composition: `ALL->PANCARTE`,
-      },
-      {
-        type: "data",
         layerName: "GESLACHT",
         property: "Source Text",
         value: `${data.facebook_gender}`,
@@ -147,10 +154,10 @@ const all = async (data) => {
       },
       {
         type: "data",
-        layerName: "GSM",
+        layerName: "WOONPLAATS",
         property: "Source Text",
-        value: `${data.phonenumber}`,
-        composition: "ALL->PANCARTE",
+        value: `${data.facebook_hometown}`,
+        composition: `ALL->PANCARTE`,
       },
       {
         type: "data",
@@ -161,9 +168,31 @@ const all = async (data) => {
       },
       {
         type: "data",
+        layerName: "TELEFOON",
+        property: "Source Text",
+        value: `${data.phonenumber}`,
+        composition: "ALL->PANCARTE",
+      },
+
+      {
+        type: "data",
         layerName: "MOMENTEEL",
         property: "Source Text",
         value: `Omgeving van ${data.fingerprint_momenteel}`,
+        composition: "ALL->PANCARTE",
+      },
+      {
+        type: "data",
+        layerName: "IP",
+        property: "Source Text",
+        value: `${data.fingerprint_ip}`,
+        composition: "ALL->PANCARTE",
+      },
+      {
+        type: "data",
+        layerName: "WERK",
+        property: "Source Text",
+        value: `${data.linkedin_experience}`,
         composition: "ALL->PANCARTE",
       },
       {
@@ -175,9 +204,37 @@ const all = async (data) => {
       },
       {
         type: "data",
-        layerName: "WERK",
+        layerName: "INSTAGRAM_VOLGERS",
         property: "Source Text",
-        value: `${data.linkedin_experience}`,
+        value: `${data.instagram_followers_count}`,
+        composition: "ALL->PANCARTE",
+      },
+      {
+        type: "data",
+        layerName: "SPOTIFY_AFSPEELLIJST",
+        property: "Source Text",
+        value: `${data.spotify_playlist}`,
+        composition: "ALL->PANCARTE",
+      },
+      {
+        type: "data",
+        layerName: "SPOTIFY_VOLGT",
+        property: "Source Text",
+        value: `${data.spotify_follower}`,
+        composition: "ALL->PANCARTE",
+      },
+      {
+        type: "data",
+        layerName: "STRAVA_CLUB",
+        property: "Source Text",
+        value: `${data.strava_club}`,
+        composition: "ALL->PANCARTE",
+      },
+      {
+        type: "data",
+        layerName: "STRAVA_VOLGT",
+        property: "Source Text",
+        value: `${data.strava_follower}`,
         composition: "ALL->PANCARTE",
       },
       {
@@ -185,6 +242,30 @@ const all = async (data) => {
         layerName: "FOTO",
         src: `${data.facebook_foto}`,
         composition: "ALL->PANCARTE->FOTO",
+      },
+      {
+        type: "image",
+        layerName: "FOTO",
+        src: `${data.instagram_image_1}`,
+        composition: "ALL->PANCARTE->FOTO_2",
+      },
+      {
+        type: "image",
+        layerName: "FOTO",
+        src: `${data.instagram_image_2}`,
+        composition: "ALL->PANCARTE->FOTO_3",
+      },
+      {
+        type: "image",
+        layerName: "FOTO",
+        src: `${data.strava_image}`,
+        composition: "ALL->PANCARTE->FOTO_4",
+      },
+      {
+        type: "image",
+        layerName: "FOTO",
+        src: `${data.instagram_image_3}`,
+        composition: "ALL->PANCARTE->FOTO_5",
       },
     ],
     actions: {
@@ -219,7 +300,7 @@ const all = async (data) => {
   result.on("error", (err) => console.log("project rendering error", err));
 };
 
-const end = async (res, data) => {
+const end = async (data) => {
   const result = await client.addJob({
     template: {
       src: `file:///Users/joppe.rabijns/Desktop/NEXRENDER_V1/1080p_Tracking.aep`,
@@ -244,13 +325,6 @@ const end = async (res, data) => {
       },
       {
         type: "data",
-        layerName: "WOONPLAATS",
-        property: "Source Text",
-        value: `${data.facebook_hometown}`,
-        composition: `END->PANCARTE`,
-      },
-      {
-        type: "data",
         layerName: "GESLACHT",
         property: "Source Text",
         value: `${data.facebook_gender}`,
@@ -258,10 +332,10 @@ const end = async (res, data) => {
       },
       {
         type: "data",
-        layerName: "GSM",
+        layerName: "WOONPLAATS",
         property: "Source Text",
-        value: `${data.phonenumber}`,
-        composition: "END->PANCARTE",
+        value: `${data.facebook_hometown}`,
+        composition: `END->PANCARTE`,
       },
       {
         type: "data",
@@ -272,9 +346,31 @@ const end = async (res, data) => {
       },
       {
         type: "data",
+        layerName: "TELEFOON",
+        property: "Source Text",
+        value: `${data.phonenumber}`,
+        composition: "END->PANCARTE",
+      },
+
+      {
+        type: "data",
         layerName: "MOMENTEEL",
         property: "Source Text",
         value: `Omgeving van ${data.fingerprint_momenteel}`,
+        composition: "END->PANCARTE",
+      },
+      {
+        type: "data",
+        layerName: "IP",
+        property: "Source Text",
+        value: `${data.fingerprint_ip}`,
+        composition: "END->PANCARTE",
+      },
+      {
+        type: "data",
+        layerName: "WERK",
+        property: "Source Text",
+        value: `${data.linkedin_experience}`,
         composition: "END->PANCARTE",
       },
       {
@@ -286,9 +382,37 @@ const end = async (res, data) => {
       },
       {
         type: "data",
-        layerName: "WERK",
+        layerName: "INSTAGRAM_VOLGERS",
         property: "Source Text",
-        value: `${data.linkedin_experience}`,
+        value: `${data.instagram_followers_count}`,
+        composition: "END->PANCARTE",
+      },
+      {
+        type: "data",
+        layerName: "SPOTIFY_AFSPEELLIJST",
+        property: "Source Text",
+        value: `${data.spotify_playlist}`,
+        composition: "END->PANCARTE",
+      },
+      {
+        type: "data",
+        layerName: "SPOTIFY_VOLGT",
+        property: "Source Text",
+        value: `${data.spotify_follower}`,
+        composition: "END->PANCARTE",
+      },
+      {
+        type: "data",
+        layerName: "STRAVA_CLUB",
+        property: "Source Text",
+        value: `${data.strava_club}`,
+        composition: "END->PANCARTE",
+      },
+      {
+        type: "data",
+        layerName: "STRAVA_VOLGT",
+        property: "Source Text",
+        value: `${data.strava_follower}`,
         composition: "END->PANCARTE",
       },
       {
@@ -296,6 +420,30 @@ const end = async (res, data) => {
         layerName: "FOTO",
         src: `${data.facebook_foto}`,
         composition: "END->PANCARTE->FOTO",
+      },
+      {
+        type: "image",
+        layerName: "FOTO",
+        src: `${data.instagram_image_1}`,
+        composition: "END->PANCARTE->FOTO_2",
+      },
+      {
+        type: "image",
+        layerName: "FOTO",
+        src: `${data.instagram_image_2}`,
+        composition: "END->PANCARTE->FOTO_3",
+      },
+      {
+        type: "image",
+        layerName: "FOTO",
+        src: `${data.strava_image}`,
+        composition: "END->PANCARTE->FOTO_4",
+      },
+      {
+        type: "image",
+        layerName: "FOTO",
+        src: `${data.instagram_image_3}`,
+        composition: "END->PANCARTE->FOTO_5",
       },
     ],
     actions: {

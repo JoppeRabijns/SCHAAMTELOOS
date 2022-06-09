@@ -11,9 +11,9 @@ dsqdsd vbsqdvsqndvsqdvsqdvsqnbdvsqb dvsq vdsqddddqsdsqdsqdsqdsqdsqdsqdsqdsqsdqdq
 
 ## 💻 Tech Stack
 
-**Client:** React, Redux, GSAP, Socket.io
+**Client:** React, Redux, SCSS, GSAP, Socket.io
 
-**Server:** Node, Express, NexRender, Twillio, Socket.io
+**Server:** Node, Express, NexRender, Twillio, Socket.io, Python, Seleniumn, BS4
 
 ## 🚀 Lokaal starten
 
