@@ -77,13 +77,15 @@ app.post("/render", (req, res) => {
     }
   }
 
+  /*   .split(",")[0] */
+
   let nexrenderData = {
     phonenumber: req.body.phonenumber,
     facebook_id: req.body.facebook.id,
     facebook_name: req.body.facebook.name,
     facebook_gender: gender,
     facebook_date: date,
-    facebook_hometown: checkUndefined(req.body.facebook.hometown.split(",")[0]),
+    facebook_hometown: checkUndefined(req.body.facebook.hometown),
     facebook_email: checkUndefined(req.body.facebook.email),
     fingerprint_momenteel: checkUndefined(
       req.body.fingerprint.ipLocation.city.name
@@ -102,11 +104,11 @@ app.post("/render", (req, res) => {
 
   console.log(nexrenderData);
 
-  all(res, nexrenderData).catch(console.error);
-  end(res, nexrenderData).catch(console.error);
+  all(nexrenderData).catch(console.error);
+  end(nexrenderData).catch(console.error);
 });
 
-const all = async (res, data) => {
+const all = async (data) => {
   const result = await client.addJob({
     template: {
       src: `file:///Users/joppe.rabijns/Desktop/NEXRENDER_V1/1080p_Tracking.aep`,
