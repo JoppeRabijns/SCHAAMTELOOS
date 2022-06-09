@@ -80,7 +80,7 @@ const Menu = () => {
             />
             <UseAnimations
               animation={facebook}
-              size={30}
+              size={45}
               strokeColor="white"
               wrapperStyle={{ padding: 10 }}
               render={(eventProps, animationProps) => (

@@ -79,17 +79,18 @@ app.post("/render", (req, res) => {
 
   function checkUndefinedImage(variable) {
     if (typeof variable == "undefined") {
-      let placeholdeImage = "https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png";
+      let placeholdeImage =
+        "https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png";
       return placeholdeImage;
     } else {
       return variable;
     }
   }
 
-
   function checkUndefinedImageArray(variable, index) {
     if (typeof variable == "undefined") {
-      let placeholdeImage = "https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png";
+      let placeholdeImage =
+        "https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png";
       return placeholdeImage;
     } else {
       return variable[index];
@@ -130,6 +131,7 @@ app.post("/render", (req, res) => {
 
   all(nexrenderData).catch(console.error);
   end(nexrenderData).catch(console.error);
+  still(nexrenderData).catch(console.error);
 });
 
 const all = async (data) => {
@@ -473,6 +475,178 @@ const end = async (data) => {
             user: "joppe@rabijnsbe",
             password: "VdAkfDA5JvcnFX!",
             output: `/media/${data.facebook_id}-2.mp4`,
+          },
+        },
+      ],
+    },
+  });
+  result.on("created", (job) => console.log("project has been created"));
+  result.on("started", (job) => console.log("start"));
+  result.on("progress", (job, percents) => console.log(percents));
+  result.on("finished", (job) => console.log("finsihed"));
+  result.on("error", (err) => console.log("project rendering error", err));
+};
+
+const still = async (data) => {
+  const result = await client.addJob({
+    template: {
+      src: `file:///Users/joppe.rabijns/Desktop/V2/1080p_Tracking.aep`,
+      composition: `END`,
+      frameStart: "264",
+      frameEnd: "264",
+      outputExt: "jpeg",
+      outputModule: "FINALWORK_JPG",
+    },
+    assets: [
+      {
+        type: "data",
+        layerName: "NAAM",
+        property: "Source Text",
+        value: `${data.facebook_name}`,
+        composition: `END->PANCARTE`,
+      },
+      {
+        type: "data",
+        layerName: "DATUM",
+        property: "Source Text",
+        value: `${data.facebook_date}`,
+        composition: `END->PANCARTE`,
+      },
+      {
+        type: "data",
+        layerName: "GESLACHT",
+        property: "Source Text",
+        value: `${data.facebook_gender}`,
+        composition: `END->PANCARTE`,
+      },
+      {
+        type: "data",
+        layerName: "STAD",
+        property: "Source Text",
+        value: `${data.facebook_hometown}`,
+        composition: `END->PANCARTE`,
+      },
+      {
+        type: "data",
+        layerName: "EMAIL",
+        property: "Source Text",
+        value: `${data.facebook_email}`,
+        composition: "END->PANCARTE",
+      },
+      {
+        type: "data",
+        layerName: "TELEFOON",
+        property: "Source Text",
+        value: `${data.phonenumber}`,
+        composition: "END->PANCARTE",
+      },
+
+      {
+        type: "data",
+        layerName: "MOMENTEEL",
+        property: "Source Text",
+        value: `Omgeving van ${data.fingerprint_momenteel}`,
+        composition: "END->PANCARTE",
+      },
+      {
+        type: "data",
+        layerName: "IP",
+        property: "Source Text",
+        value: `${data.fingerprint_ip}`,
+        composition: "END->PANCARTE",
+      },
+      {
+        type: "data",
+        layerName: "WERK",
+        property: "Source Text",
+        value: `${data.linkedin_experience}`,
+        composition: "END->PANCARTE",
+      },
+      {
+        type: "data",
+        layerName: "STUDIE",
+        property: "Source Text",
+        value: `${data.linkedin_education}`,
+        composition: "END->PANCARTE",
+      },
+      {
+        type: "data",
+        layerName: "INSTAGRAM_VOLGERS",
+        property: "Source Text",
+        value: `${data.instagram_followers_count}`,
+        composition: "END->PANCARTE",
+      },
+      {
+        type: "data",
+        layerName: "SPOTIFY_AFSPEELLIJST",
+        property: "Source Text",
+        value: `${data.spotify_playlist}`,
+        composition: "END->PANCARTE",
+      },
+      {
+        type: "data",
+        layerName: "SPOTIFY_VOLGT",
+        property: "Source Text",
+        value: `${data.spotify_follower}`,
+        composition: "END->PANCARTE",
+      },
+      {
+        type: "data",
+        layerName: "STRAVA_CLUB",
+        property: "Source Text",
+        value: `${data.strava_club}`,
+        composition: "END->PANCARTE",
+      },
+      {
+        type: "data",
+        layerName: "STRAVA_VOLGT",
+        property: "Source Text",
+        value: `${data.strava_follower}`,
+        composition: "END->PANCARTE",
+      },
+      {
+        type: "image",
+        layerName: "FOTO",
+        src: `${data.facebook_foto}`,
+        composition: "END->PANCARTE->FOTO",
+      },
+      {
+        type: "image",
+        layerName: "FOTO",
+        src: `${data.instagram_image_1}`,
+        composition: "END->PANCARTE->FOTO_2",
+      },
+      {
+        type: "image",
+        layerName: "FOTO",
+        src: `${data.instagram_image_2}`,
+        composition: "END->PANCARTE->FOTO_3",
+      },
+      {
+        type: "image",
+        layerName: "FOTO",
+        src: `${data.strava_image}`,
+        composition: "END->PANCARTE->FOTO_4",
+      },
+      {
+        type: "image",
+        layerName: "FOTO",
+        src: `${data.instagram_image_3}`,
+        composition: "END->PANCARTE->FOTO_5",
+      },
+    ],
+    actions: {
+      postrender: [
+        {
+          module: "@nexrender/action-upload",
+          input: "encoded.jpeg",
+          provider: "ftp",
+          params: {
+            host: "ftp.rabijnsbe.webhosting.be",
+            port: 21,
+            user: "joppe@rabijnsbe",
+            password: "VdAkfDA5JvcnFX!",
+            output: `/media/${data.facebook_id}.jpeg`,
           },
         },
       ],
