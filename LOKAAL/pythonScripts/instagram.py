@@ -31,9 +31,14 @@ def selenium(driver, searchname):
   driver.find_elements_by_class_name("-qQT3")[0].click()
   time.sleep(4) 
   images=[]
-  for image in driver.find_elements_by_class_name('_aagv'):
-    images.append(image.find_element_by_tag_name('img').get_attribute('src'))
-
+  while True:
+    try:
+      for image in driver.find_elements_by_class_name('_aagv'):
+        images.append(image.find_element_by_tag_name('img').get_attribute('src'))
+      break
+    except:
+     break
+  
   followers_count = driver.find_elements_by_class_name("_ac2a")[1].get_attribute("innerHTML")
 
   print(json.dumps({

@@ -54,7 +54,7 @@ def bs4(driver):
   while True:
     try:
      experience_name = experience_enitity.find_all('a',{"class":'optional-action-target-wrapper'})[1]
-     experience_span = experience_name.find_all('span',{"class": 'mr1'})
+     experience_span = experience_name.find_all('span',{"class": 'mr1'})[0]
      experience = experience_span.get_text().strip()
      break
     except:
@@ -74,7 +74,6 @@ def bs4(driver):
     "experience": experience,
     "picture": image
   }
-  print(experience)
 
   print(json.dumps(linkedIn_data))  
 
