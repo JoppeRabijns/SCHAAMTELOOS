@@ -3,8 +3,6 @@ const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const { createClient } = require("@nexrender/api");
-const fs = require("fs");
-const path = require("path");
 
 require("dotenv").config();
 
@@ -14,7 +12,6 @@ const client = createClient({
 });
 
 //MIDDLEWARE
-app.use(express.static("static"));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -71,6 +68,7 @@ app.post("/render", (req, res) => {
     }
     return {
       phonenumber: req.body.phonenumber,
+      facebook_id: req.body.facebook.id,
       facebook_name: req.body.facebook.name,
       facebook_gender: gender,
       facebook_date: date,
@@ -116,7 +114,7 @@ const all = async (res, data) => {
         type: "data",
         layerName: "DATUM",
         property: "Source Text",
-        value: `${facebook_date}`,
+        value: `${data.facebook_date}`,
         composition: `ALL->PANCARTE`,
       },
       {
@@ -184,7 +182,7 @@ const all = async (res, data) => {
             port: 21,
             user: "joppe@rabijnsbe",
             password: "VdAkfDA5JvcnFX!",
-            output: `/media/${data.facebook.id}.mp4`,
+            output: `/media/${data.facebook_id}.mp4`,
           },
         },
       ],
@@ -220,7 +218,7 @@ const end = async (res, data) => {
         type: "data",
         layerName: "DATUM",
         property: "Source Text",
-        value: `${facebook_date}`,
+        value: `${data.facebook_date}`,
         composition: `END->PANCARTE`,
       },
       {
@@ -288,7 +286,7 @@ const end = async (res, data) => {
             port: 21,
             user: "joppe@rabijnsbe",
             password: "VdAkfDA5JvcnFX!",
-            output: `/media/${data.facebook.id}-2.mp4`,
+            output: `/media/${data.facebook_id}-2.mp4`,
           },
         },
       ],
