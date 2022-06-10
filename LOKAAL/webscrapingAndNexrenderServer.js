@@ -137,6 +137,7 @@ app.post("/render", (req, res) => {
 });
 
 const all = async (data) => {
+  let compNumber = data.images.length + 1;
   const result = await client.addJob({
     template: {
       src: `file:///Users/joppe.rabijns/Desktop/V2/1080p_Tracking.aep`,
@@ -279,7 +280,7 @@ const all = async (data) => {
       {
         type: "image",
         layerName: "FOTO",
-        src: `${data.data.images[3]}`,
+        src: `${data.images[3]}`,
         composition: "ALL->PANCARTE->FOTO_4",
       },
       {
