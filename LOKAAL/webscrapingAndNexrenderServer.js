@@ -68,6 +68,21 @@ app.post("/render", (req, res) => {
     gender = "Man";
   }
 
+  function determineComp() {
+    let nummerOfImages = 1;
+    for (let i = 0; i < 2; i++) {
+      if (typeof req.body.instagram.images[i] !== "undefined") {
+        nummerOfImages++;
+      }
+    }
+    if (typeof req.body.strava.latest_image !== "undefined") {
+      nummerOfImages++;
+    }
+    console.log(nummerOfImages);
+  }
+
+  determineComp();
+
   function checkUndefined(variable) {
     if (typeof variable == "undefined") {
       let nothing = "Niet gevonden";
@@ -92,11 +107,16 @@ app.post("/render", (req, res) => {
       let placeholdeImage =
         "https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png";
       return placeholdeImage;
-    } else if(variable === []){
-     let array=["https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png","https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png","https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png","https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png","https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png"]
-     return array[index];
-    }
-    else {
+    } else if (variable === []) {
+      let array = [
+        "https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png",
+        "https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png",
+        "https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png",
+        "https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png",
+        "https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png",
+      ];
+      return array[index];
+    } else {
       return variable[index];
     }
   }
@@ -133,7 +153,6 @@ app.post("/render", (req, res) => {
   };
 
   console.log(nexrenderData);
-
 
   all(nexrenderData).catch(console.error);
   end(nexrenderData).catch(console.error);
@@ -609,7 +628,7 @@ const still = async (data) => {
         property: "Source Text",
         value: `Volgt o.a.: ${data.spotify_follower}`,
         composition: "END->PANCARTE",
-      },      
+      },
       {
         type: "data",
         layerName: "STRAVA_ACTIVITEIT",
