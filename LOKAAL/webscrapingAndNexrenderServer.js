@@ -70,20 +70,27 @@ app.post("/render", (req, res) => {
 
   function numberOfImages() {
     let nummerOfImages = 1;
+    let images = [];
+    images.push(req.body.facebook.picture.data.url);
     if (typeof req.body.instagram.images !== "undefined") {
       for (let i = 0; i < 2; i++) {
         if (typeof req.body.instagram.images[i] !== "undefined") {
           nummerOfImages++;
+          images.push(req.body.instagram.images[i]);
         }
       }
     }
     if (typeof req.body.strava.latest_image !== "undefined") {
       nummerOfImages++;
+      images.push(req.body.strava.latest_image);
     }
-    console.log(nummerOfImages);
-    return nummerOfImages;
+    for (let i = nummerOfImages; i < 5; i++) {
+      images.push(
+        "https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png"
+      );
+    }
+    return images;
   }
-
 
   function checkUndefined(variable) {
     if (typeof variable == "undefined") {
@@ -94,39 +101,10 @@ app.post("/render", (req, res) => {
     }
   }
 
-  function checkUndefinedImage(variable) {
-    if (typeof variable == "undefined") {
-      let placeholdeImage =
-        "https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png";
-      return placeholdeImage;
-    } else {
-      return variable;
-    }
-  }
-
-  function checkUndefinedImageArray(variable, index) {
-    if (typeof variable == "undefined") {
-      let placeholdeImage =
-        "https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png";
-      return placeholdeImage;
-    } else if (!variable.length) {
-      let array = [
-        "https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png",
-        "https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png",
-        "https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png",
-        "https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png",
-        "https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png",
-      ];
-      return array[index];
-    } else {
-      return variable[index];
-    }
-  }
-
   /*   .split(",")[0] */
 
   let nexrenderData = {
-    numberOfImages: numberOfImages(),
+    images: numberOfImages(),
     phonenumber: req.body.phonenumber,
     fingerprint_ip: checkUndefined(req.body.fingerprint.ip),
     facebook_id: req.body.facebook.id,
@@ -144,10 +122,6 @@ app.post("/render", (req, res) => {
     instagram_followers_count: checkUndefined(
       req.body.instagram.followers_count
     ),
-    instagram_image_1: checkUndefinedImageArray(req.body.instagram.images, 0),
-    instagram_image_2: checkUndefinedImageArray(req.body.instagram.images, 1),
-    instagram_image_3: checkUndefinedImageArray(req.body.instagram.images, 2),
-    strava_image: checkUndefinedImage(req.body.strava.latest_image),
     strava_club: checkUndefined(req.body.strava.club),
     strava_latest: checkUndefined(req.body.strava.latest_activity),
     strava_follower: checkUndefined(req.body.strava.follower),
@@ -287,31 +261,31 @@ const all = async (data) => {
       {
         type: "image",
         layerName: "FOTO",
-        src: `${data.facebook_foto}`,
+        src: `${data.images[0]}`,
         composition: "ALL->PANCARTE->FOTO",
       },
       {
         type: "image",
         layerName: "FOTO",
-        src: `${data.instagram_image_1}`,
+        src: `${data.images[1]}`,
         composition: "ALL->PANCARTE->FOTO_2",
       },
       {
         type: "image",
         layerName: "FOTO",
-        src: `${data.instagram_image_2}`,
+        src: `${data.images[2]}`,
         composition: "ALL->PANCARTE->FOTO_3",
       },
       {
         type: "image",
         layerName: "FOTO",
-        src: `${data.strava_image}`,
+        src: `${data.data.images[3]}`,
         composition: "ALL->PANCARTE->FOTO_4",
       },
       {
         type: "image",
         layerName: "FOTO",
-        src: `${data.instagram_image_3}`,
+        src: `${data.images[4]}`,
         composition: "ALL->PANCARTE->FOTO_5",
       },
     ],
@@ -472,31 +446,31 @@ const end = async (data) => {
       {
         type: "image",
         layerName: "FOTO",
-        src: `${data.facebook_foto}`,
+        src: `${data.images[0]}`,
         composition: "END->PANCARTE->FOTO",
       },
       {
         type: "image",
         layerName: "FOTO",
-        src: `${data.instagram_image_1}`,
+        src: `${data.images[1]}`,
         composition: "END->PANCARTE->FOTO_2",
       },
       {
         type: "image",
         layerName: "FOTO",
-        src: `${data.instagram_image_2}`,
+        src: `${data.images[2]}`,
         composition: "END->PANCARTE->FOTO_3",
       },
       {
         type: "image",
         layerName: "FOTO",
-        src: `${data.strava_image}`,
+        src: `${data.images[3]}`,
         composition: "END->PANCARTE->FOTO_4",
       },
       {
         type: "image",
         layerName: "FOTO",
-        src: `${data.instagram_image_3}`,
+        src: `${data.images[4]}`,
         composition: "END->PANCARTE->FOTO_5",
       },
     ],
@@ -656,31 +630,31 @@ const still = async (data) => {
       {
         type: "image",
         layerName: "FOTO",
-        src: `${data.facebook_foto}`,
+        src: `${data.images[0]}`,
         composition: "END->PANCARTE->FOTO",
       },
       {
         type: "image",
         layerName: "FOTO",
-        src: `${data.instagram_image_1}`,
+        src: `${data.images[1]}`,
         composition: "END->PANCARTE->FOTO_2",
       },
       {
         type: "image",
         layerName: "FOTO",
-        src: `${data.instagram_image_2}`,
+        src: `${data.images[2]}`,
         composition: "END->PANCARTE->FOTO_3",
       },
       {
         type: "image",
         layerName: "FOTO",
-        src: `${data.strava_image}`,
+        src: `${data.images[3]}`,
         composition: "END->PANCARTE->FOTO_4",
       },
       {
         type: "image",
         layerName: "FOTO",
-        src: `${data.instagram_image_3}`,
+        src: `${data.images[4]}`,
         composition: "END->PANCARTE->FOTO_5",
       },
     ],
