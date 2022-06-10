@@ -33,7 +33,7 @@ function SocialIcons() {
           <a
             {...eventProps}
             href="https://www.facebook.com/sharer/sharer.php?u=https://schaamteloos.online/L&t=SCHAAMTELOOS"
-            onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
+            onClick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
             target="_blank"
             title="Share on Facebook"
             rel="noreferrer"

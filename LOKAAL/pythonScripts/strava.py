@@ -7,7 +7,7 @@ import time
 import json
 import sys
 
-searchname = "joppe rabijns"
+searchname = sys.argv[1]
 
 def selenium_latest_image(driver, searchname):
   driver.get("https://www.strava.com/login")
@@ -39,6 +39,16 @@ def bs4_latest_image(driver):
   club_name = soup.find('ul', {'class': 'clubs'})
   global club
   club = club_name.find("img")["alt"]
+  while True:
+    try:
+      activities = soup.find('div', {'class': 'Feed--entry-container--ntrEd'})
+      activity = activities.find_all("time")[0]
+      global latest_activity
+      latest_activity = activity.get_text().strip() 
+      break
+    except:
+      latest_activity = "Niet gevonden"
+      break
 
 def selenium_2(driver):
   driver.get(driver.current_url + "/follows?type=following")
@@ -66,6 +76,7 @@ while True:
     "latest_image": picture,
     "club": club,
     "follower": follower,
+    "latest_activity":latest_activity
     }
     print(json.dumps(strava_data))
     break
