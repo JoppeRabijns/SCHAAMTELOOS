@@ -13,7 +13,7 @@ def selenium(driver, searchname):
     try:
       time.sleep(1)
       driver.find_element_by_class_name("HoLwm").click()
-      time.sleep(2)
+      time.sleep(3)
       break
     except:
      break

@@ -92,7 +92,11 @@ app.post("/render", (req, res) => {
       let placeholdeImage =
         "https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png";
       return placeholdeImage;
-    } else {
+    } else if(variable === []){
+     let array=["https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png","https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png","https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png","https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png","https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png"]
+     return array[index];
+    }
+    else {
       return variable[index];
     }
   }
@@ -106,7 +110,7 @@ app.post("/render", (req, res) => {
     facebook_name: req.body.facebook.name,
     facebook_gender: gender,
     facebook_date: date,
-    facebook_hometown: checkUndefined(req.body.facebook.hometown.name),
+    facebook_hometown: "Niet gevonden",
     facebook_email: checkUndefined(req.body.facebook.email),
     fingerprint_momenteel: checkUndefined(
       req.body.fingerprint.ipLocation.city.name
@@ -234,28 +238,28 @@ const all = async (data) => {
         type: "data",
         layerName: "SPOTIFY_VOLGT",
         property: "Source Text",
-        value: `volgt o.a: ${data.spotify_follower}`,
+        value: `Volgt o.a.: ${data.spotify_follower}`,
         composition: "ALL->PANCARTE",
       },
       {
         type: "data",
         layerName: "STRAVA_ACTIVITEIT",
         property: "Source Text",
-        value: `Laatste activeit: ${data.strava_latest}`,
+        value: `Laatste activiteit: ${data.strava_latest}`,
         composition: "ALL->PANCARTE",
       },
       {
         type: "data",
         layerName: "STRAVA_CLUB",
         property: "Source Text",
-        value: `club: ${data.strava_club}`,
+        value: `Club: ${data.strava_club}`,
         composition: "ALL->PANCARTE",
       },
       {
         type: "data",
         layerName: "STRAVA_VOLGT",
         property: "Source Text",
-        value: `volgt o.a: ${data.strava_follower}`,
+        value: `Volgt o.a.: ${data.strava_follower}`,
         composition: "ALL->PANCARTE",
       },
       {
@@ -384,7 +388,7 @@ const end = async (data) => {
         type: "data",
         layerName: "IP",
         property: "Source Text",
-        value: `${data.fingerprint_ip}`,
+        value: `ip: ${data.fingerprint_ip}`,
         composition: "END->PANCARTE",
       },
       {
@@ -412,35 +416,35 @@ const end = async (data) => {
         type: "data",
         layerName: "SPOTIFY_AFSPEELLIJST",
         property: "Source Text",
-        value: `${data.spotify_playlist}`,
+        value: `afspeellijst: ${data.spotify_playlist}`,
         composition: "END->PANCARTE",
       },
       {
         type: "data",
         layerName: "SPOTIFY_VOLGT",
         property: "Source Text",
-        value: `${data.spotify_follower}`,
+        value: `Volgt o.a.: ${data.spotify_follower}`,
         composition: "END->PANCARTE",
       },
       {
         type: "data",
         layerName: "STRAVA_ACTIVITEIT",
         property: "Source Text",
-        value: `Laatste activeit: ${data.strava_latest}`,
+        value: `Laatste activiteit: ${data.strava_latest}`,
         composition: "END->PANCARTE",
       },
       {
         type: "data",
         layerName: "STRAVA_CLUB",
         property: "Source Text",
-        value: `${data.strava_club}`,
+        value: `Club: ${data.strava_club}`,
         composition: "END->PANCARTE",
       },
       {
         type: "data",
         layerName: "STRAVA_VOLGT",
         property: "Source Text",
-        value: `${data.strava_follower}`,
+        value: `Volgt o.a.: ${data.strava_follower}`,
         composition: "END->PANCARTE",
       },
       {
@@ -568,7 +572,7 @@ const still = async (data) => {
         type: "data",
         layerName: "IP",
         property: "Source Text",
-        value: `${data.fingerprint_ip}`,
+        value: `ip: ${data.fingerprint_ip}`,
         composition: "END->PANCARTE",
       },
       {
@@ -596,7 +600,7 @@ const still = async (data) => {
         type: "data",
         layerName: "SPOTIFY_AFSPEELLIJST",
         property: "Source Text",
-        value: `${data.spotify_playlist}`,
+        value: `afspeellijst: ${data.spotify_playlist}`,
         composition: "END->PANCARTE",
       },
       {
@@ -610,14 +614,14 @@ const still = async (data) => {
         type: "data",
         layerName: "STRAVA_ACTIVITEIT",
         property: "Source Text",
-        value: `Laatste activeit: ${data.strava_latest}`,
+        value: `Laatste activiteit: ${data.strava_latest}`,
         composition: "END->PANCARTE",
       },
       {
         type: "data",
         layerName: "STRAVA_CLUB",
         property: "Source Text",
-        value: `${data.strava_club}`,
+        value: `Club: ${data.strava_club}`,
         composition: "END->PANCARTE",
       },
       {
