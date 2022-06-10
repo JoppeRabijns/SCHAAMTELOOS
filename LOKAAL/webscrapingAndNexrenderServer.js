@@ -70,9 +70,11 @@ app.post("/render", (req, res) => {
 
   function determineComp() {
     let nummerOfImages = 1;
-    for (let i = 0; i < 2; i++) {
-      if (typeof req.body.instagram.images[i] !== "undefined") {
-        nummerOfImages++;
+    if (typeof req.body.instagram.images !== "undefined") {
+      for (let i = 0; i < 2; i++) {
+        if (typeof req.body.instagram.images[i] !== "undefined") {
+          nummerOfImages++;
+        }
       }
     }
     if (typeof req.body.strava.latest_image !== "undefined") {
