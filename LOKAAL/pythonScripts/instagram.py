@@ -27,9 +27,9 @@ def selenium(driver, searchname):
   time.sleep(2)
   search = driver.find_element_by_class_name("XTCLo")
   search.send_keys(searchname)
-  time.sleep(2)
+  time.sleep(4)
   driver.find_elements_by_class_name("-qQT3")[0].click()
-  time.sleep(8) 
+  time.sleep(7) 
   images=[]
   while True:
     try:
