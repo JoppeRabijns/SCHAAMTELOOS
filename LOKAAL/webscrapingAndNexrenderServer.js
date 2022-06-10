@@ -68,7 +68,7 @@ app.post("/render", (req, res) => {
     gender = "Man";
   }
 
-  function determineComp() {
+  function numberOfImages() {
     let nummerOfImages = 1;
     if (typeof req.body.instagram.images !== "undefined") {
       for (let i = 0; i < 2; i++) {
@@ -81,9 +81,9 @@ app.post("/render", (req, res) => {
       nummerOfImages++;
     }
     console.log(nummerOfImages);
+    return nummerOfImages;
   }
 
-  determineComp();
 
   function checkUndefined(variable) {
     if (typeof variable == "undefined") {
@@ -109,7 +109,7 @@ app.post("/render", (req, res) => {
       let placeholdeImage =
         "https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png";
       return placeholdeImage;
-    } else if (variable === []) {
+    } else if (!variable.length) {
       let array = [
         "https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png",
         "https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png",
@@ -126,6 +126,7 @@ app.post("/render", (req, res) => {
   /*   .split(",")[0] */
 
   let nexrenderData = {
+    numberOfImages: numberOfImages(),
     phonenumber: req.body.phonenumber,
     fingerprint_ip: checkUndefined(req.body.fingerprint.ip),
     facebook_id: req.body.facebook.id,
