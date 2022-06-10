@@ -132,8 +132,8 @@ app.post("/render", (req, res) => {
   console.log(nexrenderData);
 
   all(nexrenderData).catch(console.error);
-  end(nexrenderData).catch(console.error);
-  still(nexrenderData).catch(console.error);
+  /*   end(nexrenderData).catch(console.error);
+  still(nexrenderData).catch(console.error); */
 });
 
 const all = async (data) => {
@@ -263,31 +263,38 @@ const all = async (data) => {
         type: "image",
         layerName: "FOTO",
         src: `${data.images[0]}`,
-        composition: "ALL->PANCARTE->FOTO",
+        composition: `ALL->PANCARTE->${compNumber}_FOTOS`,
       },
       {
         type: "image",
-        layerName: "FOTO",
+        layerName: "FOTO_2",
         src: `${data.images[1]}`,
-        composition: "ALL->PANCARTE->FOTO_2",
+        composition: `ALL->PANCARTE->${compNumber}_FOTOS`,
       },
       {
         type: "image",
-        layerName: "FOTO",
+        layerName: "FOTO_3",
         src: `${data.images[2]}`,
-        composition: "ALL->PANCARTE->FOTO_3",
+        composition: `ALL->PANCARTE->${compNumber}_FOTOS`,
       },
       {
         type: "image",
-        layerName: "FOTO",
+        layerName: "FOTO_4",
         src: `${data.images[3]}`,
-        composition: "ALL->PANCARTE->FOTO_4",
+        composition: `ALL->PANCARTE->${compNumber}_FOTOS`,
       },
       {
         type: "image",
-        layerName: "FOTO",
+        layerName: "FOTO_5",
         src: `${data.images[4]}`,
-        composition: "ALL->PANCARTE->FOTO_5",
+        composition: `ALL->PANCARTE->${compNumber}_FOTOS`,
+      },
+      {
+        type: "data",
+        layerName: `${compNumber}_FOTOS`,
+        property: "Opacity",
+        composition: `ALL->PANCARTE`,
+        value: 100,
       },
     ],
     actions: {
