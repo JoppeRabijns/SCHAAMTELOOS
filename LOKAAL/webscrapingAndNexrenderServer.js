@@ -89,10 +89,10 @@ app.post("/render", (req, res) => {
         "https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png"
       );
     }
-    let imageData= {
+    let imageData = {
       nummerOfImages,
-      images
-    }
+      images,
+    };
     return imageData;
   }
 
@@ -104,8 +104,6 @@ app.post("/render", (req, res) => {
       return variable;
     }
   }
-
-  /*   .split(",")[0] */
 
   let nexrenderData = {
     images: numberOfImages(),
@@ -135,8 +133,8 @@ app.post("/render", (req, res) => {
   console.log(nexrenderData);
 
   all(nexrenderData).catch(console.error);
-  /*   end(nexrenderData).catch(console.error);
-  still(nexrenderData).catch(console.error); */
+  end(nexrenderData).catch(console.error);
+  still(nexrenderData).catch(console.error);
 });
 
 const all = async (data) => {
@@ -326,9 +324,10 @@ const all = async (data) => {
 };
 
 const end = async (data) => {
+  let compNumber = data.images.nummerOfImages;
   const result = await client.addJob({
     template: {
-      src: `file:///Users/joppe.rabijns/Desktop/V2/1080p_Tracking.aep`,
+      src: `file:///Users/joppe.rabijns/Desktop/V4/1080p_Tracking.aep`,
       composition: `END`,
       outputExt: "mov",
       outputModule: "FINALWORK",
@@ -353,13 +352,6 @@ const end = async (data) => {
         layerName: "GESLACHT",
         property: "Source Text",
         value: `${data.facebook_gender}`,
-        composition: `END->PANCARTE`,
-      },
-      {
-        type: "data",
-        layerName: "STAD",
-        property: "Source Text",
-        value: `${data.facebook_hometown}`,
         composition: `END->PANCARTE`,
       },
       {
@@ -450,32 +442,39 @@ const end = async (data) => {
       {
         type: "image",
         layerName: "FOTO",
-        src: `${data.images[0]}`,
-        composition: "END->PANCARTE->FOTO",
+        src: `${data.images.images[0]}`,
+        composition: `END->PANCARTE->${compNumber}_FOTOS->FOTO`,
       },
       {
         type: "image",
         layerName: "FOTO",
-        src: `${data.images[1]}`,
-        composition: "END->PANCARTE->FOTO_2",
+        src: `${data.images.images[1]}`,
+        composition: `END->PANCARTE->${compNumber}_FOTOS->FOTO_2`,
       },
       {
         type: "image",
         layerName: "FOTO",
-        src: `${data.images[2]}`,
-        composition: "END->PANCARTE->FOTO_3",
+        src: `${data.images.images[2]}`,
+        composition: `END->PANCARTE->${compNumber}_FOTOS->FOTO_3`,
       },
       {
         type: "image",
         layerName: "FOTO",
-        src: `${data.images[3]}`,
-        composition: "END->PANCARTE->FOTO_4",
+        src: `${data.images.images[3]}`,
+        composition: `END->PANCARTE->${compNumber}_FOTOS->FOTO_4`,
       },
       {
         type: "image",
         layerName: "FOTO",
-        src: `${data.images[4]}`,
-        composition: "END->PANCARTE->FOTO_5",
+        src: `${data.images.images[4]}`,
+        composition: `END->PANCARTE->${compNumber}_FOTOS->FOTO_5`,
+      },
+      {
+        type: "data",
+        layerName: `${compNumber}_FOTOS`,
+        property: "Opacity",
+        composition: `END->PANCARTE`,
+        value: 100,
       },
     ],
     actions: {
@@ -508,9 +507,10 @@ const end = async (data) => {
 };
 
 const still = async (data) => {
+  let compNumber = data.images.nummerOfImages;
   const result = await client.addJob({
     template: {
-      src: `file:///Users/joppe.rabijns/Desktop/V2/1080p_Tracking.aep`,
+      src: `file:///Users/joppe.rabijns/Desktop/V4/1080p_Tracking.aep`,
       composition: `END`,
       frameStart: "264",
       frameEnd: "264",
@@ -537,13 +537,6 @@ const still = async (data) => {
         layerName: "GESLACHT",
         property: "Source Text",
         value: `${data.facebook_gender}`,
-        composition: `END->PANCARTE`,
-      },
-      {
-        type: "data",
-        layerName: "STAD",
-        property: "Source Text",
-        value: `${data.facebook_hometown}`,
         composition: `END->PANCARTE`,
       },
       {
@@ -634,32 +627,39 @@ const still = async (data) => {
       {
         type: "image",
         layerName: "FOTO",
-        src: `${data.images[0]}`,
-        composition: "END->PANCARTE->FOTO",
+        src: `${data.images.images[0]}`,
+        composition: `END->PANCARTE->${compNumber}_FOTOS->FOTO`,
       },
       {
         type: "image",
         layerName: "FOTO",
-        src: `${data.images[1]}`,
-        composition: "END->PANCARTE->FOTO_2",
+        src: `${data.images.images[1]}`,
+        composition: `END->PANCARTE->${compNumber}_FOTOS->FOTO_2`,
       },
       {
         type: "image",
         layerName: "FOTO",
-        src: `${data.images[2]}`,
-        composition: "END->PANCARTE->FOTO_3",
+        src: `${data.images.images[2]}`,
+        composition: `END->PANCARTE->${compNumber}_FOTOS->FOTO_3`,
       },
       {
         type: "image",
         layerName: "FOTO",
-        src: `${data.images[3]}`,
-        composition: "END->PANCARTE->FOTO_4",
+        src: `${data.images.images[3]}`,
+        composition: `END->PANCARTE->${compNumber}_FOTOS->FOTO_4`,
       },
       {
         type: "image",
         layerName: "FOTO",
-        src: `${data.images[4]}`,
-        composition: "END->PANCARTE->FOTO_5",
+        src: `${data.images.images[4]}`,
+        composition: `END->PANCARTE->${compNumber}_FOTOS->FOTO_5`,
+      },
+      {
+        type: "data",
+        layerName: `${compNumber}_FOTOS`,
+        property: "Opacity",
+        composition: `END->PANCARTE`,
+        value: 100,
       },
     ],
     actions: {
