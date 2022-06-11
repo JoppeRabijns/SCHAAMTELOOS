@@ -89,7 +89,11 @@ app.post("/render", (req, res) => {
         "https://www.romacfuels.com/wp-content/uploads/2020/12/orionthemes-placeholder-image-1-1.png"
       );
     }
-    return images;
+    let imageData= {
+      nummerOfImages,
+      images
+    }
+    return imageData;
   }
 
   function checkUndefined(variable) {
@@ -111,7 +115,6 @@ app.post("/render", (req, res) => {
     facebook_name: req.body.facebook.name,
     facebook_gender: gender,
     facebook_date: date,
-    facebook_hometown: "Niet gevonden",
     facebook_email: checkUndefined(req.body.facebook.email),
     fingerprint_momenteel: checkUndefined(
       req.body.fingerprint.ipLocation.city.name
@@ -137,10 +140,10 @@ app.post("/render", (req, res) => {
 });
 
 const all = async (data) => {
-  let compNumber = data.images.length + 1;
+  let compNumber = data.images.nummerOfImages;
   const result = await client.addJob({
     template: {
-      src: `file:///Users/joppe.rabijns/Desktop/V2/1080p_Tracking.aep`,
+      src: `file:///Users/joppe.rabijns/Desktop/V4/1080p_Tracking.aep`,
       composition: `ALL`,
       outputExt: "mov",
       outputModule: "FINALWORK",
@@ -165,13 +168,6 @@ const all = async (data) => {
         layerName: "GESLACHT",
         property: "Source Text",
         value: `${data.facebook_gender}`,
-        composition: `ALL->PANCARTE`,
-      },
-      {
-        type: "data",
-        layerName: "STAD",
-        property: "Source Text",
-        value: `${data.facebook_hometown}`,
         composition: `ALL->PANCARTE`,
       },
       {
@@ -262,31 +258,31 @@ const all = async (data) => {
       {
         type: "image",
         layerName: "FOTO",
-        src: `${data.images[0]}`,
+        src: `${data.images.images[0]}`,
         composition: `ALL->PANCARTE->${compNumber}_FOTOS`,
       },
       {
         type: "image",
         layerName: "FOTO_2",
-        src: `${data.images[1]}`,
+        src: `${data.images.images[1]}`,
         composition: `ALL->PANCARTE->${compNumber}_FOTOS`,
       },
       {
         type: "image",
         layerName: "FOTO_3",
-        src: `${data.images[2]}`,
+        src: `${data.images.images[2]}`,
         composition: `ALL->PANCARTE->${compNumber}_FOTOS`,
       },
       {
         type: "image",
         layerName: "FOTO_4",
-        src: `${data.images[3]}`,
+        src: `${data.images.images[3]}`,
         composition: `ALL->PANCARTE->${compNumber}_FOTOS`,
       },
       {
         type: "image",
         layerName: "FOTO_5",
-        src: `${data.images[4]}`,
+        src: `${data.images.images[4]}`,
         composition: `ALL->PANCARTE->${compNumber}_FOTOS`,
       },
       {
