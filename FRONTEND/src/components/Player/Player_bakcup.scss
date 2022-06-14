@@ -1,20 +1,14 @@
-.player1,
-.player2 {
+.player {
   margin: 0;
   position: absolute;
   width: 100vw;
+  z-index: -2;
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
   margin: auto;
-}
-.player1 {
-  z-index: -2;
-}
-.player2 {
-  z-index: -3;
 }
 
 .longPressButton {

@@ -2,8 +2,10 @@ import "./Menu.scss";
 import UIfx from "uifx";
 import { useDispatch, useSelector, batch } from "react-redux";
 import {
-  setPlayingStateTrue,
-  setPlayingStateFalse,
+  setPlaying1StateTrue,
+  setPlaying1StateFalse,
+  setPlaying2StateTrue,
+  setPlaying2StateFalse,
 } from "../../slices/videoSlice";
 import { setmenuOpenTrue, setmenuOpenFalse } from "../../slices/menuSlice";
 import click_select from "../../assets/sfx/click_select.mp3";
@@ -19,7 +21,9 @@ import linkedin from "react-useanimations/lib/linkedin";
 
 const Menu = () => {
   const dispatch = useDispatch();
-  const videoPlaying = useSelector((state) => state.video.playing);
+
+  const Playing1 = useSelector((state) => state.video.playing1);
+  const Playing2 = useSelector((state) => state.video.playing2);
   const menuOpen = useSelector((state) => state.menu.menuOpen);
 
   const clickSFX = new UIfx(click_select, {
@@ -28,18 +32,22 @@ const Menu = () => {
   });
 
   function controlMenu() {
-    if (videoPlaying && !menuOpen) {
+    if (Playing1 && !menuOpen) {
       clickSFX.play();
-      batch(() => {
-        dispatch(setPlayingStateFalse());
-        dispatch(setmenuOpenTrue());
-      });
-    } else if (!videoPlaying && menuOpen) {
+      dispatch(setPlaying1StateFalse());
+      dispatch(setmenuOpenTrue());
+    } else if (!Playing1 && menuOpen) {
       clickSFX.play();
-      batch(() => {
-        dispatch(setPlayingStateTrue());
-        dispatch(setmenuOpenFalse());
-      });
+      dispatch(setPlaying1StateTrue());
+      dispatch(setmenuOpenFalse());
+    } else if (Playing2 && !menuOpen) {
+      clickSFX.play();
+      dispatch(setPlaying2StateFalse());
+      dispatch(setmenuOpenTrue());
+    } else if (!Playing2 && menuOpen) {
+      clickSFX.play();
+      dispatch(setPlaying2StateTrue());
+      dispatch(setmenuOpenFalse());
     }
   }
 

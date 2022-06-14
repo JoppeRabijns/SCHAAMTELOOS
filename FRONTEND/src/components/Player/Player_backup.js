@@ -4,10 +4,8 @@ import "./Player.scss";
 import ReactPlayer from "react-player";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  setPlaying1StateTrue,
-  setPlaying1StateFalse,
-  setPlaying2StateTrue,
-  setPlaying2StateFalse,
+  setPlayingStateTrue,
+  setPlayingStateFalse,
   setTime,
 } from "../../slices/videoSlice";
 import { setMenuHide } from "../../slices/menuSlice";
@@ -18,24 +16,18 @@ import gsap from "gsap";
 const axios = require("axios").default;
 
 function Player({ gender }) {
-  const playerRef1 = useRef();
+  const playerRef = useRef();
   const dispatch = useDispatch();
   const callStatus = useSelector((state) => state.call.status);
-  const Playing1 = useSelector((state) => state.video.playing1);
-  const Playing2 = useSelector((state) => state.video.playing2);
+  const videoPlaying = useSelector((state) => state.video.playing);
   const videoTime = useSelector((state) => state.video.time);
   const facebookID = useSelector((state) => state.data.facebook.id);
   const phoneNumber = useSelector((state) => state.data.phonenumber);
 
-  const [currentVideoPlayer1, setCurrentVideoplayer1] = useState();
-  const [currentVideoPlayer2, setCurrentVideoplayer2] = useState();
-
+  const [currentVideo, setCurrentVideo] = useState();
   const [sound, setSound] = useState(1); //1 = ON ; 0 = OFF
   const [currentNumber, setCurrentNumber] = useState(0);
   const [image, setImage] = useState("");
-
-  const [opacity1, setOpacity1] = useState(1);
-  const [opacity2, setOpacity2] = useState(0);
 
   const videos = [
     `https://schaamteloos.online/media/TEKST1_${gender}.mp4`,
@@ -44,48 +36,35 @@ function Player({ gender }) {
     `https://schaamteloos.online/media/${facebookID}-2.mp4`,
   ];
 
+  /**
+   * Set current video
+   */
   useEffect(() => {
     if (currentNumber < videos.length) {
-      setCurrentVideoplayer1(videos[currentNumber]);
+      setCurrentVideo(videos[currentNumber]);
     }
   }, [currentNumber]);
 
-  function checkProgress(progress, playerId) {
-    dispatch(setTime(progress.playedSeconds));
-    if (progress.played > 0.75 && playerId === 1) {
-      setCurrentVideoplayer2(videos[currentNumber + 1]);
-    } else if (progress.played > 0.75 && playerId === 2) {
-      setCurrentVideoplayer1(videos[currentNumber + 1]);
-    }
-  }
+  /**
+   * Pause video on spacebar down
+   */
 
-  function transition(playerId) {
-    if (currentNumber >= 3) {
-      setImage(`https://schaamteloos.online/media/${facebookID}.jpg`);
-      const tl = gsap.timeline();
-      tl.to("#videoplayer", { opacity: 0, duration: 1.5 });
-      tl.to("#soundToggle", { opacity: 0, duration: 0.5 });
-      tl.to("#einde1", { opacity: 1, duration: 1 });
-      tl.to("#einde1", { opacity: 0, duration: 1, delay: 2 });
-      tl.to("#einde2", { opacity: 1, duration: 1.5 });
-      tl.to("#einde2", { opacity: 0, duration: 1.5, delay: 2 });
-      tl.to("#terugnaarhome", { opacity: 1, duration: 1 });
-    } else if (playerId === 1) {
-      console.log(1);
-      dispatch(setPlaying2StateTrue());
-      setOpacity1(0);
-      setOpacity2(1);
-      dispatch(setPlaying1StateFalse());
-      setCurrentNumber(currentNumber + 1);
-    } else if (playerId === 2) {
-      console.log(2);
-      dispatch(setPlaying1StateTrue());
-      setOpacity1(1);
-      setOpacity2(0);
-      dispatch(setPlaying2StateFalse());
-      setCurrentNumber(currentNumber + 1);
+  /*
+  useEffect(() => {
+    if (currentNumber === 1 || currentNumber === 3) {
+      console.log(currentNumber);
+      window.addEventListener("keydown", (e) => {
+        if (e.code === "Space") {
+          dispatch(setPlayingStateFalse());
+        }
+      });
+      window.addEventListener("keyup", (e) => {
+        if (e.code === "Space") {
+          dispatch(setPlayingStateTrue());
+        }
+      });
     }
-  }
+  }); */
 
   /**
    * INITIATE CALL
@@ -95,7 +74,7 @@ function Player({ gender }) {
       if (callStatus === "not initiated") {
         call();
         setTimeout(() => {
-          dispatch(setPlaying1StateFalse());
+          dispatch(setPlayingStateFalse());
         }, 4500);
       }
     }
@@ -107,8 +86,8 @@ function Player({ gender }) {
   useEffect(() => {
     console.log(callStatus);
     if (callStatus === "in-progress") {
-      playerRef1.current.seekTo(10.6, "seconds");
-      dispatch(setPlaying1StateTrue());
+      playerRef.current.seekTo(10.6, "seconds");
+      dispatch(setPlayingStateTrue());
       setSound(0);
     }
   }, [callStatus]);
@@ -146,40 +125,39 @@ function Player({ gender }) {
     }
   }, [currentNumber]);
 
+  function ended() {
+    if (currentNumber === 3) {
+      setImage(`https://schaamteloos.online/media/${facebookID}.jpg`);
+      const tl = gsap.timeline();
+      tl.to("#videoplayer", { opacity: 0, duration: 1.5 });
+      tl.to("#soundToggle", { opacity: 0, duration: 0.5 });
+      tl.to("#einde1", { opacity: 1, duration: 1 });
+      tl.to("#einde1", { opacity: 0, duration: 1, delay: 2 });
+      tl.to("#einde2", { opacity: 1, duration: 1.5 });
+      tl.to("#einde2", { opacity: 0, duration: 1.5, delay: 2 });
+      tl.to("#terugnaarhome", { opacity: 1, duration: 1 });
+    } else {
+      setCurrentNumber(currentNumber + 1);
+    }
+  }
+
   return (
     <>
       <ReactPlayer
-        url={currentVideoPlayer1}
+        url={currentVideo}
         id="videoplayer"
-        playing={Playing1}
+        playing={videoPlaying}
         preload="auto"
         volume={sound}
         width="100vw"
         height="100vh"
-        className="player1"
-        ref={playerRef1}
-        style={{ opacity: opacity1 }}
-        onEnded={() => transition(1)}
+        className="player"
+        ref={playerRef}
+        onEnded={() => ended()}
         onProgress={(progress) => {
-          Playing1 && checkProgress(progress, 1);
+          videoPlaying && dispatch(setTime(progress.playedSeconds));
         }}
       />
-      <ReactPlayer
-        url={currentVideoPlayer2}
-        id="videoplayer"
-        playing={Playing2}
-        preload="auto"
-        volume={sound}
-        width="100vw"
-        height="100vh"
-        className="player2"
-        style={{ opacity: opacity2 }}
-        onEnded={() => transition(2)}
-        onProgress={(progress) => {
-          Playing2 && checkProgress(progress, 2);
-        }}
-      />
-
       <h1 id="einde1" className="einde">
         HET INTERNET VERGEET NIETS,
       </h1>

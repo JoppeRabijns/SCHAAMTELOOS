@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  playing: true,
+  playing1: true,
+  playing2: false,
   time: 0,
   renderProgress: 0,
   holdAndContinueButton: false,
@@ -12,11 +13,17 @@ export const videoSlice = createSlice({
   name: "videoSlice",
   initialState,
   reducers: {
-    setPlayingStateTrue: (state) => {
-      state.playing = true;
+    setPlaying1StateTrue: (state) => {
+      state.playing1 = true;
     },
-    setPlayingStateFalse: (state) => {
-      state.playing = false;
+    setPlaying1StateFalse: (state) => {
+      state.playing1 = false;
+    },
+    setPlaying2StateTrue: (state) => {
+      state.playing2 = true;
+    },
+    setPlaying2StateFalse: (state) => {
+      state.playing2 = false;
     },
     setTime: (state, action) => {
       state.time = action.payload;
@@ -40,8 +47,10 @@ export const videoSlice = createSlice({
 });
 
 export const {
-  setPlayingStateTrue,
-  setPlayingStateFalse,
+  setPlaying1StateTrue,
+  setPlaying1StateFalse,
+  setPlaying2StateTrue,
+  setPlaying2StateFalse,
   setTime,
   setRenderProgress,
   setRenderStart,
