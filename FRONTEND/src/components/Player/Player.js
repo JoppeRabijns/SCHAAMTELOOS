@@ -27,6 +27,7 @@ function Player({ gender }) {
   const [currentVideo, setCurrentVideo] = useState();
   const [sound, setSound] = useState(1); //1 = ON ; 0 = OFF
   const [currentNumber, setCurrentNumber] = useState(0);
+  const [image, setImage] = useState("");
 
   const videos = [
     `https://schaamteloos.online/media/TEKST1_${gender}.mp4`,
@@ -126,8 +127,10 @@ function Player({ gender }) {
 
   function ended() {
     if (currentNumber === 3) {
+      setImage(`https://schaamteloos.online/media/${facebookID}.jpg`);
       const tl = gsap.timeline();
       tl.to("#videoplayer", { opacity: 0, duration: 1.5 });
+      tl.to("#soundToggle", { opacity: 0, duration: 0.5 });
       tl.to("#einde1", { opacity: 1, duration: 1 });
       tl.to("#einde1", { opacity: 0, duration: 1, delay: 2 });
       tl.to("#einde2", { opacity: 1, duration: 1.5 });
@@ -156,17 +159,12 @@ function Player({ gender }) {
         }}
       />
       <h1 id="einde1" className="einde">
-        HET INTERNET VERGEET NIKS,
+        HET INTERNET VERGEET NIETS,
       </h1>
       <h1 id="einde2" className="einde">
         WEES NIET SCHAAMTELOOS ONLINE!
       </h1>
-      <img
-        src={`https://schaamteloos.online/media/${facebookID}.jpg`}
-        alt=""
-        id="terugnaarhome"
-        className="stillImage"
-      />
+      <img src={image} alt="" id="terugnaarhome" className="stillImage" />
       <button
         className="terugnaarhome"
         id="terugnaarhome"
@@ -179,6 +177,7 @@ function Player({ gender }) {
           src={soundGif}
           alt=""
           className="soundToggle"
+          id="soundToggle"
           onClick={() => {
             if (sound === 1) {
               setSound(0);
@@ -192,6 +191,7 @@ function Player({ gender }) {
           src={soundOff}
           alt=""
           className="soundToggle"
+          id="soundToggle"
           onClick={() => {
             if (sound === 1) {
               setSound(0);

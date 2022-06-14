@@ -9,11 +9,10 @@
   height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
-
 .fingerprintSideData h6:first-child {
-  margin-left: -3vw;
+  position: absolute;
+  left: -30px;
   transform: rotate(-90deg);
   letter-spacing: 0.5em;
   -webkit-user-select: none;
@@ -23,33 +22,12 @@
 }
 
 .fingerprintSideData h6:last-child {
-  margin-right: -4vw;
+  position: absolute;
+  right: -85px;
   transform: rotate(90deg);
   letter-spacing: 0.5em;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
-
-@media only screen and (max-width: 1600px) {
-  .fingerprintSideData h6:first-child {
-    margin-left: -5vw;
-    transform: rotate(-90deg);
-    letter-spacing: 0.5em;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-
-  .fingerprintSideData h6:last-child {
-    margin-right: -6vw;
-    transform: rotate(90deg);
-    letter-spacing: 0.5em;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
 }

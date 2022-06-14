@@ -72,6 +72,14 @@ app.post("/render", (req, res) => {
     let nummerOfImages = 1;
     let images = [];
     images.push(req.body.facebook.picture.data.url);
+    if (typeof req.body.strava.latest_image !== "undefined") {
+      nummerOfImages++;
+      images.push(req.body.strava.latest_image);
+    }
+    if (typeof req.body.linkedIn.picture !== "undefined") {
+      nummerOfImages++;
+      images.push(req.body.linkedIn.picture);
+    }
     if (typeof req.body.instagram.images !== "undefined") {
       for (let i = 0; i < 2; i++) {
         if (typeof req.body.instagram.images[i] !== "undefined") {
@@ -79,10 +87,6 @@ app.post("/render", (req, res) => {
           images.push(req.body.instagram.images[i]);
         }
       }
-    }
-    if (typeof req.body.strava.latest_image !== "undefined") {
-      nummerOfImages++;
-      images.push(req.body.strava.latest_image);
     }
     for (let i = nummerOfImages; i < 5; i++) {
       images.push(

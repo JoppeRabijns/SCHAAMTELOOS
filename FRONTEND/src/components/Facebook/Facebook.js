@@ -14,9 +14,9 @@ function Facebook() {
     <div className="button">
       <FacebookLogin
         appId="659826721686533"
-        fields="name,email,picture,birthday,posts,gender,hometown,link,friends,location,photos{images}"
+        fields="name,email,picture,birthday,gender"
         callback={dispatchFacebookData}
-        scope="public_profile, user_birthday,user_photos,user_likes,user_gender,user_link,user_hometown,user_friends,user_location,email "
+        scope="public_profile, user_birthday, user_gender, email "
         cssClass="facebookButton"
         textButton="LOGIN MET FACEBOOK OM TE STARTEN"
       />
