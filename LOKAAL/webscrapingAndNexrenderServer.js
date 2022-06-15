@@ -68,6 +68,8 @@ app.post("/render", (req, res) => {
     gender = "Man";
   }
 
+  const webpRegex = /\.webp?/i;
+
   function numberOfImages() {
     let nummerOfImages = 1;
     let images = [];
@@ -82,7 +84,10 @@ app.post("/render", (req, res) => {
     }
     if (typeof req.body.instagram.images !== "undefined") {
       for (let i = 0; i < 2; i++) {
-        if (typeof req.body.instagram.images[i] !== "undefined") {
+        if (
+          typeof req.body.instagram.images[i] !== "undefined" &&
+          !req.body.instagram.images[i].match(webpRegex)
+        ) {
           nummerOfImages++;
           images.push(req.body.instagram.images[i]);
         }
