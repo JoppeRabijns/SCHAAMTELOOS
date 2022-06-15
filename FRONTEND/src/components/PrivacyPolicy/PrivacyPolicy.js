@@ -1,17 +1,17 @@
-import "./OverDitProject.scss";
+import "./PrivacyPolicy.scss";
 import { useDispatch } from "react-redux";
-import { setOverDitProjectFalse } from "../../slices/menuSlice";
+import { setPrivacyPolicyFalse } from "../../slices/menuSlice";
 import { X } from "react-feather";
 
-function OverDitProject() {
+function PrivacyPolicy() {
   const dispatch = useDispatch();
 
   return (
-    <div className="OverDitProject">
-      <button onClick={() => dispatch(setOverDitProjectFalse())}>
+    <div className="PrivacyPolicy">
+      <button onClick={() => dispatch(setPrivacyPolicyFalse())}>
         <X size={30} />
       </button>
-      <h2>Over dit project</h2>
+      <h2>Privacy Policy</h2>
       <p>
         SCHAAMTELOOS.ONLINE is een webplatform dat de bezoeker op een
         diverterende en interactieve manier bewust moet maken van het veilig en
@@ -55,4 +55,4 @@ function OverDitProject() {
   );
 }
 
-export default OverDitProject;
+export default PrivacyPolicy;

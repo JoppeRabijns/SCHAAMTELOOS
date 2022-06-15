@@ -18,8 +18,8 @@ import gsap from "gsap";
 const axios = require("axios").default;
 
 function Player({ gender }) {
-  const playerRef1 = useRef();
   const dispatch = useDispatch();
+  const playerRef1 = useRef();
   const callStatus = useSelector((state) => state.call.status);
   const Playing1 = useSelector((state) => state.video.playing1);
   const Playing2 = useSelector((state) => state.video.playing2);

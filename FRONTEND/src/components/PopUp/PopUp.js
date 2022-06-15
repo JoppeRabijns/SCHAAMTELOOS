@@ -25,7 +25,6 @@ function PopUp() {
       setDoorgaan(false);
     }
   };
-
   const stap1 = () => {
     return (
       <>
