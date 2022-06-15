@@ -9,25 +9,23 @@
   height: 100vh;
   display: flex;
   align-items: center;
-}
-.fingerprintSideData h6:first-child {
-  position: absolute;
-  left: -30px;
-  transform: rotate(-90deg);
-  letter-spacing: 0.5em;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
 
-.fingerprintSideData h6:last-child {
-  position: absolute;
-  right: -85px;
-  transform: rotate(90deg);
-  letter-spacing: 0.5em;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  h6 {
+    position: absolute;
+    letter-spacing: 0.5em;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    &:first-child {
+      left: -30px;
+      transform: rotate(-90deg);
+    }
+
+    &:last-child {
+      right: -85px;
+      transform: rotate(90deg);
+    }
+  }
 }

@@ -36,7 +36,6 @@ function Nexrender() {
       })
         .then(dispatch(setRenderStart()))
         .then(function (response) {
-          console.log(response);
           navigate("/video");
         });
     }

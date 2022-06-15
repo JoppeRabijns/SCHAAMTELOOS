@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-
 import "./Pwnd.scss";
 import gsap from "gsap";
 
@@ -9,13 +8,12 @@ const axios = require("axios").default;
 function Pwnd() {
   const [pwnd, setPwnd] = useState(false);
   const [notPwnd, setnotPwdn] = useState(false);
-
   const [animationDone, setAnimationDone] = useState(false);
   const userPhonenumber = useSelector((state) => state.data.phonenumber);
+
   const email = useSelector((state) => state.data.facebook.email);
 
   useEffect(() => {
-    console.log(email);
     axios({
       method: "post",
       url: "https://schaamteloos.herokuapp.com/pwnd",

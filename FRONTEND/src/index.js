@@ -2,7 +2,7 @@ import ReactDOM from "react-dom/client";
 import "./style.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Video from "./pages/Video";
-import Login from "./pages/Home/Login";
+import Login from "./pages/Login/Login";
 import Loading from "./pages/Loading/Loading";
 import { BrowserView, MobileView } from "react-device-detect";
 

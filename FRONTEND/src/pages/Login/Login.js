@@ -1,7 +1,7 @@
 import backgroundVideo from "../../assets/video/INTRO.mp4";
 import FacebookComponent from "../../components/Facebook/Facebook";
 import Fingerprint from "../../components/Fingerprint/Fingerprint";
-import "../Home/Login.scss";
+import "./Login.scss";
 import Title from "../../components/Title/Title";
 import OverDitProject from "../../components/OverDitProject/OverDitProject";
 import HomeAnimation from "../../components/HomeAnimation/HomeAnimation";
@@ -35,7 +35,7 @@ function Login() {
         <h2 className="cursor" onClick={() => dispatch(setPrivacyPolicyTrue())}>
           PRIVACY POLICY
         </h2>
-        <SocialIcons />
+        <SocialIcons size={30} />
       </div>
       {facebookID ? (
         <>

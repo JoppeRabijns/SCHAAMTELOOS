@@ -5,7 +5,7 @@ import { addFacebookData } from "../../slices/dataSlice";
 
 function Facebook() {
   const dispatch = useDispatch();
-
+  
   const dispatchFacebookData = (response) => {
     dispatch(addFacebookData(response));
   };

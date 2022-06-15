@@ -5,12 +5,12 @@ import linkedin from "react-useanimations/lib/linkedin";
 
 //https://stackoverflow.com/questions/9120539/facebook-share-link-without-javascript
 
-function SocialIcons() {
+function SocialIcons({ size }) {
   return (
-    <div className="cursor">
+    <div className="cursor" style={{ display: "flex",}}>
       <UseAnimations
         animation={twitter}
-        size={30}
+        size={size}
         strokeColor="white"
         wrapperStyle={{ padding: 10 }}
         render={(eventProps, animationProps) => (
@@ -26,7 +26,7 @@ function SocialIcons() {
       />
       <UseAnimations
         animation={facebook}
-        size={30}
+        size={size}
         strokeColor="white"
         wrapperStyle={{ padding: 10 }}
         render={(eventProps, animationProps) => (
@@ -44,7 +44,7 @@ function SocialIcons() {
       />
       <UseAnimations
         animation={linkedin}
-        size={30}
+        size={size}
         strokeColor="white"
         wrapperStyle={{ padding: 10 }}
         render={(eventProps, animationProps) => (

@@ -5,24 +5,23 @@
   width: 100%;
   bottom: 0;
   left: 0;
-}
-.loadingText {
-  font-size: 14px;
-  bottom: 40px;
-  left: 30px;
-  color: #ffffff;
-}
-.progressBar {
-  background: #ffffff;
-  transform-origin: top left;
-  transform: scale(0, 1);
-  position: relative;
-  animation: scalebar 40s linear 1;
-  animation-fill-mode: forwards;
-}
 
-.progressBar {
-  height: 20px;
+  .loadingText {
+    font-size: 14px;
+    bottom: 40px;
+    left: 30px;
+    color: #ffffff;
+  }
+  .progressBar {
+    background: #ffffff;
+    opacity: 1;
+    transform-origin: top left;
+    transform: scale(0, 1);
+    position: relative;
+    animation: scalebar 40s linear 1;
+    animation-fill-mode: forwards;
+    height: 20px;
+  }
 }
 
 @keyframes scalebar {

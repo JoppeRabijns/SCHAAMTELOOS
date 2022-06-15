@@ -11,12 +11,12 @@ function Title(props) {
 
   //https://dev.to/stackfindover/animated-eyes-follow-mouse-cursor-javascript-mouse-move-3n40
   useEffect(() => {
-    window.addEventListener("mousemove", (evt) => {
-      let xLeft = 816 - (window.innerWidth / 2 + 400 - evt.pageX) / 100;
-      let yLeft = 72 - (window.innerHeight / 2 - evt.pageY) / 70;
+    window.addEventListener("mousemove", (event) => {
+      let xLeft = 816 - (window.innerWidth / 2 + 400 - event.pageX) / 100;
+      let yLeft = 72 - (window.innerHeight / 2 - event.pageY) / 70;
       setTranslateLeft("translate(" + xLeft + "," + yLeft + ")");
-      let xRight = 924 - (window.innerWidth / 2 + 400 - evt.pageX) / 100;
-      let yRight = 72 - (window.innerHeight / 2 - evt.pageY) / 70;
+      let xRight = 924 - (window.innerWidth / 2 + 400 - event.pageX) / 100;
+      let yRight = 72 - (window.innerHeight / 2 - event.pageY) / 70;
       setTranslateRight("translate(" + xRight + "," + yRight + ")");
     });
   });

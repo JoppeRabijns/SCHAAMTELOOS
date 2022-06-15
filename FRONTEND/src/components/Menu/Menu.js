@@ -1,6 +1,6 @@
 import "./Menu.scss";
 import UIfx from "uifx";
-import { useDispatch, useSelector, batch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setPlaying1StateTrue,
   setPlaying1StateFalse,
@@ -12,16 +12,13 @@ import click_select from "../../assets/sfx/click_select.mp3";
 import Title from "../Title/Title";
 import { X } from "react-feather";
 import { Menu as MenuIcon } from "react-feather";
-import UseAnimations from "react-useanimations";
-import twitter from "react-useanimations/lib/twitter";
-import facebook from "react-useanimations/lib/facebook";
-import linkedin from "react-useanimations/lib/linkedin";
 import OverDitProject from "../OverDitProject/OverDitProject";
 import PrivacyPolicy from "../PrivacyPolicy/PrivacyPolicy";
 import {
   setOverDitProjectTrue,
   setPrivacyPolicyTrue,
 } from "../../slices/menuSlice";
+import SocialIcons from "../SocialIcons/SocialIcons";
 
 //https://stackoverflow.com/questions/9120539/facebook-share-link-without-javascript
 
@@ -83,65 +80,13 @@ const Menu = () => {
               <h2 onClick={() => window.location.reload()}>DATA VERWIJDEREN</h2>
             </div>
             <div className="delen">
-              <UseAnimations
-                animation={twitter}
-                size={45}
-                className="icon"
-                strokeColor="white"
-                wrapperStyle={{ padding: 10 }}
-                render={(eventProps, animationProps) => (
-                  <a
-                    {...eventProps}
-                    href="http://www.twitter.com/share?url=https://schaamteloos.online/"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <div {...animationProps} />
-                  </a>
-                )}
-              />
-              <UseAnimations
-                animation={facebook}
-                size={45}
-                strokeColor="white"
-                wrapperStyle={{ padding: 10 }}
-                render={(eventProps, animationProps) => (
-                  <a
-                    {...eventProps}
-                    href="https://www.facebook.com/sharer/sharer.php?u=https://schaamteloos.online/L&t=SCHAAMTELOOS"
-                    onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
-                    target="_blank"
-                    rel="noreferrer"
-                    title="Share on Facebook"
-                  >
-                    <div {...animationProps} />
-                  </a>
-                )}
-              />
-              <UseAnimations
-                animation={linkedin}
-                size={45}
-                className="icon"
-                strokeColor="white"
-                wrapperStyle={{ padding: 10 }}
-                render={(eventProps, animationProps) => (
-                  <a
-                    {...eventProps}
-                    href="https://www.linkedin.com/sharing/share-offsite/?url=https://schaamteloos.online/"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <div {...animationProps} />
-                  </a>
-                )}
-              />
+              <SocialIcons size={45} />
             </div>
           </div>
         )}
       </>
     );
   };
-
   return (
     <>
       <h2 onClick={controlMenu} className="menuButton">

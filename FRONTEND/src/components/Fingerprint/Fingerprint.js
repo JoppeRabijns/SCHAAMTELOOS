@@ -3,11 +3,13 @@ import FingerprintJS from "@fingerprintjs/fingerprintjs-pro";
 import { useDispatch } from "react-redux";
 import { addFingerprintData } from "../../slices/dataSlice";
 import "./Fingerprint.scss";
+
 const BROWSER_API_KEY = "hhw5HKFXfMgxBOyiY8av";
 const SERVER_API_KEY = "eTJEo5opd2vkqhHS8OQc";
 
 function Fingerprint() {
   const dispatch = useDispatch();
+
   const [ip, setIp] = useState();
   const [longitude, setLongitude] = useState();
   const [latitude, setLatidude] = useState();

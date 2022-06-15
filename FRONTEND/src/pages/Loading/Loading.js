@@ -17,19 +17,9 @@ import Progressbar from "../../components/Progressbar/Progressbar";
 const axios = require("axios").default;
 
 function Loading() {
-  useEffect(() => {
-    window.onbeforeunload = function () {
-      return true;
-    };
-    return () => {
-      window.onbeforeunload = null;
-    };
-  }, []);
-
   const dispatch = useDispatch();
   const name = useSelector((state) => state.data.facebook.name);
   const scrapingFinished = useSelector((state) => state.data.scrapingFinished);
-  /*   const scrapingData = useSelector((state) => state.data);*/
 
   useEffect(() => {
     if (!scrapingFinished) {
