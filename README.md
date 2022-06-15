@@ -2,7 +2,7 @@
 
 https://schaamteloos.online
 
-dsqdsd vbsqdvsqndvsqdvsqdvsqnbdvsqb dvsq vdsqddddqsdsqdsqdsqdsqdsqdsqdsqdsqsdqdqsdqdqsdsqdqsdsqddsqdd
+![App Screenshot](https://schaamteloos.online/media/mockup.png)
 
 ## 👨🏼‍💻 Auteur
 
@@ -40,7 +40,3 @@ Start the server
 ```bash
   npm start
 ```
-
-## 📸 Screenshots
-
-![App Screenshot](https://schaamteloos.online/media/mockup.png)
