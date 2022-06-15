@@ -186,14 +186,16 @@ function Player({ gender }) {
       <h1 id="einde2" className="einde">
         WEES NIET SCHAAMTELOOS ONLINE!
       </h1>
-      <img src={image} alt="" id="terugnaarhome" className="stillImage" />
-      <button
-        className="terugnaarhome"
-        id="terugnaarhome"
-        onClick={() => window.location.reload()}
-      >
-        Terug naar home
-      </button>
+      <div id="terugnaarhome" className="imageDiv">
+        <img src={image} alt="" className="stillImage" />
+        <button
+          className="terugnaarhome"
+          onClick={() => window.location.reload()}
+        >
+          Terug naar home
+        </button>
+      </div>
+
       {sound === 1 ? (
         <img
           src={soundGif}

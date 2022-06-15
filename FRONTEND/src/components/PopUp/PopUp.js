@@ -1,5 +1,5 @@
 import "./PopUp.scss";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { Smartphone, Volume2 } from "react-feather";
 import { useNavigate } from "react-router-dom";
@@ -11,15 +11,15 @@ function PopUp() {
   const [doorgaan, setDoorgaan] = useState(false);
 
   const navigate = useNavigate();
+  const phoneNumber = useSelector((state) => state.data.phonenumber);
 
   //https://regex101.com/r/hN5oL4/1
   const phonenumberRegex =
     /^(((\+|00)32[ ]?(?:\(0\)[ ]?)?)|0){1}(4(60|[789]\d)\/?(\s?\d{2}\.?){2}(\s?\d{2})|(\d\/?\s?\d{3}|\d{2}\/?\s?\d{2})(\.?\s?\d{2}){2})(\d)$/gm;
 
   const handleInput = (e) => {
-    console.log();
+    dispatch(setPhonenumber(e.target.value));
     if (e.target.value.match(phonenumberRegex)) {
-      dispatch(setPhonenumber(e.target.value));
       setDoorgaan(true);
     } else {
       setDoorgaan(false);
@@ -83,8 +83,9 @@ function PopUp() {
           <input
             onChange={(e) => handleInput(e)}
             type="tel"
-            placeholder="+324........"
+            value={phoneNumber}
             required
+            autoFocus
             className="telefoon cursor"
           />
           <br />

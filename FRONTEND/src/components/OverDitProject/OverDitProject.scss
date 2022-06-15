@@ -1,18 +1,5 @@
 .OverDitProject {
-  height: 70vh;
-  width: 30vw;
-  border-radius: 13px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 13px;
-  opacity: 1;
-  background-color: rgba(0, 0, 0, 0.316);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  border-radius: 25px;
-  flex-direction: column;
-  padding: 35px;
+  width: 32vw;
   position: absolute;
   left: 0;
   right: 0;
@@ -20,6 +7,26 @@
   bottom: 0;
   margin: auto;
   z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .OverDitProjectDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    border-radius: 13px;
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.316);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border-radius: 25px;
+    flex-direction: column;
+    padding: 35px;
+  }
+
   h2 {
     margin-bottom: 50px;
     font-size: 1.35em;
@@ -29,13 +36,14 @@
   }
   p {
     font-weight: 200;
+    font-size: 100%;
   }
 
   button {
     position: absolute;
     top: 0;
     right: 0;
-    padding: 25px;
+    padding: 15px;
     border-bottom-left-radius: 13px;
     border-top-right-radius: 20px;
     background-color: transparent;

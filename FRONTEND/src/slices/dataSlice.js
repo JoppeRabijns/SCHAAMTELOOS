@@ -7,7 +7,7 @@ const initialState = {
   fingerprint: false,
   facebook: false,
   instagram: false,
-  phonenumber: false,
+  phonenumber: "+32",
   scrapingFinished: false,
 };
 
