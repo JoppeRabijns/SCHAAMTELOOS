@@ -1,11 +1,18 @@
 from selenium import webdriver 
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
+from dotenv import load_dotenv
+import os
 import time
 import json
 import sys
 
+load_dotenv()
+
 searchname = sys.argv[1]
+
+INSTAGRAM_PASSWORD = os.getenv('INSTAGRAM_PASSWORD')
+
 
 def selenium(driver, searchname):
   driver.get("https://www.instagram.com/")
@@ -20,7 +27,7 @@ def selenium(driver, searchname):
   username = driver.find_elements_by_class_name("zyHYP")[0]
   username.send_keys("hello@adequaat.media")   
   pword = driver.find_elements_by_class_name("zyHYP")[1]
-  pword.send_keys("@d3qu@@t")        
+  pword.send_keys(INSTAGRAM_PASSWORD)        
   driver.find_element_by_xpath("//button[@type='submit']").click()
   time.sleep(2)
   driver.find_element_by_class_name("XTCLo").click

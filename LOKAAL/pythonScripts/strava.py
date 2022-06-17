@@ -3,11 +3,18 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
+from dotenv import load_dotenv
+import os
 import time
 import json
 import sys
 
+
+load_dotenv()
+
 searchname = sys.argv[1]
+
+STRAVA_PASSWORD = os.getenv('STRAVA_PASSWORD')
 
 def selenium_latest_image(driver, searchname):
   driver.get("https://www.strava.com/login")
@@ -15,7 +22,7 @@ def selenium_latest_image(driver, searchname):
   username = driver.find_element_by_id("email")
   username.send_keys("joppe.rabijns@gmail.com")  
   pword = driver.find_element_by_id("password")
-  pword.send_keys("E-vBi*St,-S2?dE")        
+  pword.send_keys(STRAVA_PASSWORD)        
   driver.find_element_by_id("login-button").click()
   time.sleep(1)
   driver.find_element_by_id("open-global-search-button").click()

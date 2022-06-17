@@ -2,11 +2,18 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
+from dotenv import load_dotenv
+import os
 import time
 import json
 import sys
 
+load_dotenv()
+
 searchname = sys.argv[1]
+
+LINKEDIN_PASSWORD = os.getenv('LINKEDIN_PASSWORD')
+
 
 def selenium(driver, searchname):
   driver.get("https://linkedin.com/login")
@@ -14,7 +21,7 @@ def selenium(driver, searchname):
   username = driver.find_element_by_id("username")
   username.send_keys("joppe@rabijns.be")   
   pword = driver.find_element_by_id("password")
-  pword.send_keys("!cpnexkQ6")        
+  pword.send_keys(LINKEDIN_PASSWORD)        
   driver.find_element_by_xpath("//button[@type='submit']").click()
   time.sleep(3)
   driver.find_element_by_class_name("search-global-typeahead__input").click()
