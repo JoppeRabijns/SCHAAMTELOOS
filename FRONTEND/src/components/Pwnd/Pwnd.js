@@ -64,18 +64,20 @@ function Pwnd() {
 
   const handlePwnd = () => {
     return pwnd.map((data) => {
-      return (
-        <div key={data.Name} className="pwndCard">
-          <div className="image">
-            <img src={data.LogoPath} alt={data.Name} />
-          </div>
-          <h1>{data.Name}</h1>
-          <h2>{data.BreachDate}</h2>
-          <h3>Gecompromitteerde gegevens:</h3>
+      for (let i = 0; i < 3; i++) {
+        return (
+          <div key={data.Name} className="pwndCard">
+            <div className="image">
+              <img src={data.LogoPath} alt={data.Name} />
+            </div>
+            <h1>{data.Name}</h1>
+            <h2>{data.BreachDate}</h2>
+            <h3>Gecompromitteerde gegevens:</h3>
 
-          <ul>{getClasses(data.DataClasses)}</ul>
-        </div>
-      );
+            <ul>{getClasses(data.DataClasses)}</ul>
+          </div>
+        );
+      }
     });
   };
 

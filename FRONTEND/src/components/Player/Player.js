@@ -14,6 +14,7 @@ import { setMenuHide } from "../../slices/menuSlice";
 import soundGif from "../../assets/sound.gif";
 import soundOff from "../../assets/soundOff.png";
 import gsap from "gsap";
+import SocialsIcons from "./../SocialIcons/SocialIcons";
 
 const axios = require("axios").default;
 
@@ -188,6 +189,7 @@ function Player({ gender }) {
       </h1>
       <div id="terugnaarhome" className="imageDiv">
         <img src={image} alt="" className="stillImage" />
+        <SocialsIcons size={35} />
         <button
           className="terugnaarhome"
           onClick={() => window.location.reload()}

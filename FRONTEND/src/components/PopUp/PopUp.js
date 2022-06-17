@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Smartphone, Volume2 } from "react-feather";
 import { useNavigate } from "react-router-dom";
 import { setPhonenumber } from "../../slices/dataSlice";
+import { setPrivacyPolicyTrue } from "../../slices/menuSlice";
 
 function PopUp() {
   const dispatch = useDispatch();
@@ -43,7 +44,13 @@ function PopUp() {
           lacinia. Nullam et dapibus metus. Ut sit amet enim in justo tempus
           dapibus id egestas est. Quisque condimentum mauris dolor. Aliquam
           sollicitudin in justo eget dignissim. Proin felis felis, luctus sit
-          amet lacinia sed, fringilla vitae odio. Pellentesque risus felis.
+          amet lacinia sed, fringilla vitae odio. Pellentesque.
+        </p>
+        <p
+          className="leeshier cursor"
+          onClick={() => dispatch(setPrivacyPolicyTrue())}
+        >
+          Lees hier het privacybeleid
         </p>
         <button className="doorgaan" onClick={() => setStap(2)}>
           AKKOORD
@@ -101,6 +108,12 @@ function PopUp() {
             <></>
           )}
         </form>
+        <p
+          className="leeshier cursor"
+          onClick={() => dispatch(setPrivacyPolicyTrue())}
+        >
+          Lees hier het privacybeleid
+        </p>
       </>
     );
   };
