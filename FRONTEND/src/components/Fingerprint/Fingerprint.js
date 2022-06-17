@@ -4,9 +4,6 @@ import { useDispatch } from "react-redux";
 import { addFingerprintData } from "../../slices/dataSlice";
 import "./Fingerprint.scss";
 
-const BROWSER_API_KEY = "hhw5HKFXfMgxBOyiY8av";
-const SERVER_API_KEY = "eTJEo5opd2vkqhHS8OQc";
-
 function Fingerprint() {
   const dispatch = useDispatch();
 
@@ -16,7 +13,7 @@ function Fingerprint() {
 
   useEffect(() => {
     FingerprintJS.load({
-      token: BROWSER_API_KEY,
+      token: process.env.REACT_APP_FINGERPRINT_BROWSER_API_KEY,
     })
       .then((fp) => fp.get())
       .then((result) => {
@@ -27,7 +24,7 @@ function Fingerprint() {
 
   function getVisits(visitorId) {
     return fetch(
-      `https://api.fpjs.io/visitors/${visitorId}?limit=1&token=${SERVER_API_KEY}`
+      `https://api.fpjs.io/visitors/${visitorId}?limit=1&token=${process.env.REACT_APP_FINGERPRINT_SERVER_API_KEY}`
     ).then((response) => {
       return response.json();
     });
